@@ -1,3 +1,5 @@
+"use client";
+
 import { useAuthCallback } from "@mysten/enoki/react";
 import { useEffect } from "react";
 

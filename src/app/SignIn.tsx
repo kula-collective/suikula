@@ -1,3 +1,5 @@
+"use client";
+
 import { useEnokiFlow } from "@mysten/enoki/react";
 
 export default function SignIn() {
