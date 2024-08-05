@@ -1,3 +1,5 @@
+"use client";
+
 import { EnokiFlowProvider } from "@mysten/enoki/react";
 import SignIn from "./SignIn";
 
