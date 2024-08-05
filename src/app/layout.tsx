@@ -1,3 +1,5 @@
+"use client";
+
 import { EnokiFlowProvider } from "@mysten/enoki/react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
