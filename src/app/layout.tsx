@@ -7,6 +7,7 @@ import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
+// FIXME Put this in a layout but not in the same place as EnokiFlowProvider
 // export const metadata: Metadata = {
 //   title: "Let's Kula on Sui",
 //   description: "The gift economy platform on Sui",
