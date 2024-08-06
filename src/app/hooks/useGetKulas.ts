@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { useSui } from "./useSui";
+import { useSuiClient } from "./useSuiClient";
 
 export const useGetKulas = (dashboardId: string) => {
   // const { currentAccount } = useWalletKit();
-  const { suiClient } = useSui();
+  const suiClient = useSuiClient();
 
   const [kulaList, setKulaList] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -11,33 +11,45 @@ export const useGetKulas = (dashboardId: string) => {
 
   useEffect(
     () => {
-      const reFetchData = async () => {
-        setIsLoading(true);
-
-        console.log(`fetching obj_id=${dashboardId}`);
-        console.log("calling Get Kulas");
-        suiClient
-          .getDynamicFields({
-            parentId: dashboardId,
-            cursor: null,
-            limit: 100,
-          })
-          .then((res) => {
-            console.log(`res: ${JSON.stringify(res.data)}`);
-            setKulaList(res.data.map((item) => item.name.value as string));
-            setIsLoading(false);
-            setIsError(false);
-          })
-          .catch((err) => {
-            console.log(err);
-            setKulaList([]);
-            setIsLoading(false);
+      console.log("getOwnedObjects");
+      suiClient
+        .getOwnedObjects({
+          owner:
+            "0x223e0c9d6e816715218a10b380fb89dfa2e3e385f47803aaeef50dbdd1757aa2",
+        })
+        .then((resp) => {
+          console.log("resp", resp);
+          if (resp.data[0].error) {
             setIsError(true);
-          });
-      };
+          }
+        });
+      // const reFetchData = async () => {
+      //   setIsLoading(true);
+
+      //   console.log(`fetching obj_id=${dashboardId}`);
+      //   console.log("calling Get Kulas");
+      //   suiClient
+      //     .getDynamicFields({
+      //       parentId: dashboardId,
+      //       cursor: null,
+      //       limit: 100,
+      //     })
+      //     .then((res) => {
+      //       console.log(`res: ${JSON.stringify(res.data)}`);
+      //       setKulaList(res.data.map((item) => item.name.value as string));
+      //       setIsLoading(false);
+      //       setIsError(false);
+      //     })
+      //     .catch((err) => {
+      //       console.log(err);
+      //       setKulaList([]);
+      //       setIsLoading(false);
+      //       setIsError(true);
+      //     });
+      // };
 
       // if (!!currentAccount?.address) {
-      reFetchData();
+      // reFetchData();
       //   } else {
       //     setKulaList([]);
       //     setIsLoading(false);

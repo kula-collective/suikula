@@ -1,17 +1,12 @@
 // import { useSuiClient } from "@mysten/dapp-kit";
 import { useEnokiFlow } from "@mysten/enoki/react";
-import { getFullnodeUrl, SuiClient } from "@mysten/sui/client";
 import { Transaction } from "@mysten/sui/transactions";
 import { toast } from "react-hot-toast";
+import { useSuiClient } from "./useSuiClient";
 
 export const useSignAndExecuteTransaction = () => {
-  // use getFullnodeUrl to define Devnet RPC location
-  const rpcUrl = getFullnodeUrl("testnet");
-
-  // create a client connected to testnet
-  const client = new SuiClient({ url: rpcUrl });
-
   const enokiFlow = useEnokiFlow();
+  const suiClient = useSuiClient();
 
   const handleSignAndExecuteTransaction = async (
     tx: Transaction,
@@ -21,7 +16,7 @@ export const useSignAndExecuteTransaction = () => {
     return enokiFlow
       .getKeypair()
       .then((keypair) => {
-        return client
+        return suiClient
           .signAndExecuteTransaction({
             signer: keypair,
             transaction: tx,
