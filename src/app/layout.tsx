@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <EnokiFlowProvider apiKey={process.env.NEXT_PUBLIC_ENOKI_API_KEY!}>
       <html lang="en">
-        <body className={inter.className}>{children}</body>
+        <body>{children}</body>
       </html>
     </EnokiFlowProvider>
   );
