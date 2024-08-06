@@ -7,7 +7,7 @@ export const useCreateKula = () => {
     const tx = new Transaction();
     tx.moveCall({
       target: `${process.env.KULA_MOVE_PACKAGE}::community::create_community`,
-      arguments: [tx.pure(name)],
+      arguments: [tx.pure.string(name)],
     });
     setIsLoading(true);
     console.log("useDashboardKula, signing transaction block...");
