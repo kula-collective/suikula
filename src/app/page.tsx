@@ -1,6 +1,6 @@
 "use client";
 
-import GoogleSignInButton from "./components/GoogleSignInButton";
+import GoogleSignInButton from "./components/google-signin-button";
 
 export default function Home() {
   return (

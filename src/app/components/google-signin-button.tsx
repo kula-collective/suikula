@@ -1,7 +1,7 @@
 "use client";
 
 import { useEnokiFlow } from "@mysten/enoki/react";
-import styles from "./GoogleSignInButton.module.css";
+import styles from "./google-signin-button.module.css";
 
 export default function GoogleSignInButton() {
   const enokiFlow = useEnokiFlow();
