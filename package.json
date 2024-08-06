@@ -10,9 +10,11 @@
   },
   "dependencies": {
     "@mysten/enoki": "^0.3.13",
+    "google-auth-library": "^9.13.0",
     "next": "14.2.5",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "server-only": "^0.0.1"
   },
   "devDependencies": {
     "@types/node": "^20",
