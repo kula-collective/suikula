@@ -5,8 +5,8 @@ import { useParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 // import { AddReview } from "@/app/components/review/AddReview";
+import { useSignAndExecuteTransaction } from "@mysten/dapp-kit";
 import { Transaction } from "@mysten/sui/transactions";
-import { useWalletKit } from "@mysten/wallet-kit";
 
 export default function ServiceDetailed() {
   const router = useRouter();
@@ -15,7 +15,7 @@ export default function ServiceDetailed() {
   //   useGetAllReviews(id);
 
   const [openModal, setOpenModal] = useState(false);
-  const { signAndExecuteTransaction } = useWalletKit();
+  const { handleSignAndExecuteTransaction } = useSignAndExecuteTransaction();
 
   const SUI_CLOCK =
     "0x0000000000000000000000000000000000000000000000000000000000000006";
@@ -59,7 +59,7 @@ export default function ServiceDetailed() {
     });
 
     tx.setGasBudget(1000000000);
-    const resp = await signAndExecuteTransaction({
+    const resp = await handleSignAndExecuteTransaction({
       Transaction: tx,
       options: {
         showEffects: true,
