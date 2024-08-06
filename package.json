@@ -9,11 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@mysten/dapp-kit": "^0.14.14",
     "@mysten/enoki": "^0.3.13",
+    "@mysten/sui": "^1.4.0",
     "google-auth-library": "^9.13.0",
     "next": "14.2.5",
     "react": "^18",
     "react-dom": "^18",
+    "react-hot-toast": "^2.4.1",
     "server-only": "^0.0.1"
   },
   "devDependencies": {
