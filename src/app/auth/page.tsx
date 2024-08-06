@@ -11,11 +11,13 @@ export default function Auth() {
     if (handled) {
       const hash = window.location.hash;
       console.log("hash", hash);
-      verifyGoogle(hash).then((userId) => {
+      const token = hash.split("&")[0].substring("#id_token=".length);
+      console.log("token", token);
+      verifyGoogle(token).then((userId) => {
         console.log("Got userid" + userId);
         // Get access token, perform security checks,
         // manage user session, handle errors, and so on.
-        window.location.href = "/home";
+        window.location.href = "/home?id=" + userId;
       });
     }
   }, [handled]);
