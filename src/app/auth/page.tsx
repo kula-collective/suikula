@@ -12,8 +12,10 @@ export default function Auth() {
       const hash = window.location.hash;
       const token = hash.split("&")[0].substring("#id_token=".length);
       verifyGoogle(token)
-        .then((userId) => {
-          console.log("userId", userId);
+        .then((user) => {
+          console.log("user", user);
+          // TODO store user
+
           // TODO redirect
           //   window.location.href = "/home?id=" + userId;
         })

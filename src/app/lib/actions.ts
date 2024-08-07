@@ -1,5 +1,7 @@
 "use server";
 
+import { User } from "../types/user";
+
 export async function verifyGoogle(token: string) {
   try {
     const { OAuth2Client } = require("google-auth-library");
@@ -15,10 +17,14 @@ export async function verifyGoogle(token: string) {
     console.log("ticket", ticket);
     const payload = ticket.getPayload();
     console.log("payload", payload);
-    const userid = payload["sub"];
-    console.log("userid", userid);
 
-    return userid;
+    return {
+      id: payload["sub"],
+      firstName: payload["given_name"],
+      lastName: payload["family_name"],
+      email: payload["email"],
+      pic: payload["picture"],
+    } as User;
   } catch (error) {
     throw error;
   }
