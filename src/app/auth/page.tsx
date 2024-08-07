@@ -21,7 +21,7 @@ export default function Auth() {
           console.log("user", user);
           // TODO store user
 
-          //   window.location.href = "/home?id=" + user.id;
+          window.location.href = "/home?id=" + user.id;
         })
         .catch((err) => {
           // TODO Display error
