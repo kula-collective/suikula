@@ -20,25 +20,21 @@ export const useSignAndExecuteTransaction = () => {
           .signAndExecuteTransaction({
             signer: keypair,
             transaction: tx,
-            //   requestType: "WaitForLocalExecution",
-            //   options: {
-            //     showEffects: true,
-            //     showEvents: true,
-            //   },
+            requestType: "WaitForLocalExecution",
+            options: {
+              showEffects: true,
+              showEvents: true,
+            },
           })
           .then((resp) => {
             setIsLoading(false);
-            console.log("resp", resp);
-            if (resp.errors) {
-              console.log("errors", resp.errors);
-            }
-            if (!resp.errors) {
+            console.log(resp);
+            if (resp.effects?.status.status === "success") {
               console.log(`${operation} operation successful`);
               toast.success(`${operation} operation successful`);
-              return;
+              return resp.effects;
             } else {
               console.log(`${operation} operation failed`);
-              console.error(resp.errors);
               toast.error(`${operation} operation failed.`);
               return;
             }

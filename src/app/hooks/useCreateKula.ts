@@ -11,7 +11,16 @@ export const useCreateKula = () => {
     });
     setIsLoading(true);
     console.log("createKula, signing transaction block...");
-    return handleSignAndExecuteTransaction(tx, "KulaCreation", setIsLoading);
+    const res = await handleSignAndExecuteTransaction(
+      tx,
+      "KulaCreation",
+      setIsLoading
+    );
+    const objId = res?.created?.[0].reference.objectId;
+    if (objId) {
+      console.log("Created Kula", objId);
+    }
+    return objId;
   };
 
   return { createKula };

@@ -17,14 +17,14 @@ export default function CreateKulaButton() {
     modal?.close();
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const form = e.target as HTMLFormElement;
     const formData = new FormData(form);
     const formJson = Object.fromEntries(formData.entries());
     const kulaName = formJson["name"].toString();
-    createKula(kulaName, (isLoading: boolean) => {});
+    await createKula(kulaName, (isLoading: boolean) => {});
   };
 
   return (
