@@ -28,13 +28,17 @@ export const useSignAndExecuteTransaction = () => {
           })
           .then((resp) => {
             setIsLoading(false);
-            console.log(resp);
-            if (resp.effects?.status.status === "success") {
+            console.log("resp", resp);
+            if (resp.errors) {
+              console.log("errors", resp.errors);
+            }
+            if (!resp.errors) {
               console.log(`${operation} operation successful`);
               toast.success(`${operation} operation successful`);
               return;
             } else {
               console.log(`${operation} operation failed`);
+              console.error(resp.errors);
               toast.error(`${operation} operation failed.`);
               return;
             }
