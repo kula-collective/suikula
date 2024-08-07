@@ -10,7 +10,7 @@ export const useCreateKula = () => {
       arguments: [tx.pure.string(name)],
     });
     setIsLoading(true);
-    console.log("useDashboardKula, signing transaction block...");
+    console.log("createKula, signing transaction block...");
     return handleSignAndExecuteTransaction(tx, "KulaCreation", setIsLoading);
   };
 
