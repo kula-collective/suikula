@@ -16,11 +16,11 @@ export default function Auth() {
           console.log("user", user);
           // TODO store user
 
-          // TODO redirect
-          //   window.location.href = "/home?id=" + userId;
+          window.location.href = "/home?id=" + user.id;
         })
         .catch((err) => {
           // TODO Display error
+          console.error("Failed to verify token", err);
         });
     }
   }, [handled]);
