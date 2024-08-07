@@ -6,7 +6,7 @@ export const useCreateKula = () => {
   const createKula = async (name: string, setIsLoading: any) => {
     const tx = new Transaction();
     tx.moveCall({
-      target: `${process.env.KULA_MOVE_PACKAGE}::community::create_community`,
+      target: `${process.env.NEXT_PUBLIC_TESTNET_KULA_PACKAGE_ID}::community::create_community`,
       arguments: [tx.pure.string(name)],
     });
     setIsLoading(true);

@@ -16,7 +16,6 @@ export const useSignAndExecuteTransaction = () => {
     return enokiFlow
       .getKeypair({ network: "testnet" })
       .then((keypair) => {
-        console.log("using keypair", keypair);
         return suiClient
           .signAndExecuteTransaction({
             signer: keypair,
