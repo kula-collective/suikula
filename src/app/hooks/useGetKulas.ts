@@ -1,28 +1,60 @@
+import { SuiGraphQLClient } from "@mysten/sui/graphql";
+import { graphql } from "@mysten/sui/graphql/schemas/2024.4";
 import { useEffect, useState } from "react";
+import { Kula } from "../types/kula";
 import { useSuiClient } from "./useSuiClient";
 
-export const useGetKulas = (dashboardId: string) => {
+export const useGetKulas = () => {
   // const { currentAccount } = useWalletKit();
   const suiClient = useSuiClient();
 
-  const [kulaList, setKulaList] = useState<string[]>([]);
+  const [kulaList, setKulaList] = useState<Kula[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
   useEffect(
     () => {
-      console.log("getOwnedObjects");
-      suiClient
-        .getOwnedObjects({
-          owner:
-            "0x223e0c9d6e816715218a10b380fb89dfa2e3e385f47803aaeef50dbdd1757aa2",
-        })
-        .then((resp) => {
-          console.log("resp", resp);
-          if (resp.data[0].error) {
-            setIsError(true);
+      const gqlClient = new SuiGraphQLClient({
+        url: "https://sui-testnet.mystenlabs.com/graphql",
+      });
+
+      const kulasQuery = graphql(`
+        query { 
+          objects(first: 10, filter: { 
+            type: "${process.env.NEXT_PUBLIC_TESTNET_KULA_PACKAGE_ID}::community::Community"
+          }) {
+            nodes {
+              asMoveObject {
+                contents {
+                  json
+                }
+              }
+            }
           }
+        }
+      `);
+
+      async function getKulas() {
+        const result = await gqlClient.query({
+          query: kulasQuery,
         });
+        console.log("gql result", result);
+
+        const kulas =
+          result.data?.objects.nodes.map(
+            (node) =>
+              ({
+                id: (node.asMoveObject?.contents?.json as any)["id"] as string,
+                name: (node.asMoveObject?.contents?.json as any)[
+                  "community_name"
+                ] as string,
+              } as Kula)
+          ) || [];
+        return kulas;
+      }
+
+      getKulas().then(setKulaList);
+
       // const reFetchData = async () => {
       //   setIsLoading(true);
 
