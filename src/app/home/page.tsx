@@ -1,6 +1,7 @@
 import CreateKulaButton from "../components/create-kula-button";
 import { Kulas } from "../components/kulas";
 import LogoutButton from "../components/logout-button";
+import Wallet from "../components/wallet";
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
       <CreateKulaButton />
 
       <div>
+        <Wallet />
         <LogoutButton />
       </div>
     </>
