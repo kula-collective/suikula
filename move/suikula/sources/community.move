@@ -16,25 +16,24 @@ module suikula::community {
         }, ctx.sender())
     }
     /// Kula
-    public struct Community has key, store {
+    public struct Kula has key, store {
         id: UID,
-        community_name: String
+        name: String
     }
 
-    /// Create a new community
-    public fun create_community(
-        _: &AdminCap,
-        community_name: String,
+    /// Create a new Kula community
+    public fun create_kula_community(
+        name: String,
         ctx: &mut TxContext,
     ) {
-        let db = Community {
+        let db = Kula {
             id: object::new(ctx),
-            community_name
+            name
         };
         transfer::share_object(db);
     }
 
-    public fun register_member(_: &AdminCap, db: &mut Community, service_id: ID, recipient: address, ctx: &mut TxContext) {
+    public fun register_member(_: &AdminCap, db: &mut Kula, service_id: ID, recipient: address, ctx: &mut TxContext) {
         transfer::transfer(GiftCap {
             id: object::new(ctx)
         }, recipient);

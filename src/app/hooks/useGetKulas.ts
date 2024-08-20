@@ -21,7 +21,7 @@ export const useGetKulas = () => {
       const kulasQuery = graphql(`
         query { 
           objects(first: 10, filter: { 
-            type: "${process.env.NEXT_PUBLIC_TESTNET_KULA_PACKAGE_ID}::community::Community"
+            type: "${process.env.NEXT_PUBLIC_TESTNET_KULA_PACKAGE_ID}::community::Kula"
           }) {
             nodes {
               asMoveObject {
@@ -46,7 +46,7 @@ export const useGetKulas = () => {
               ({
                 id: (node.asMoveObject?.contents?.json as any)["id"] as string,
                 name: (node.asMoveObject?.contents?.json as any)[
-                  "community_name"
+                  "name"
                 ] as string,
               } as Kula)
           ) || [];
