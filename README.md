@@ -48,3 +48,6 @@ sui client ptb  --move-call 0xf7bcc87292cbdb5834056dff059768f8ea66663f5b241fbe2b
 https://suiscan.xyz/testnet/tx/9LyBtmTXWmEuC85WwaNQsZtSJh55Dg1S9h6dUHfeHK11
 
 Member is then associated with a kula (community) and we also created GiftCap to allow the access control, making it possible for us to only allow that specific user to create gift.
+
+## to create a gift for a memeber, we need to pass the GiftCap, KulaID and recipient address. Note, the GiftCap has to be owned by the transaction sender (meaning the sender needs to be a member).
+sui client ptb  --move-call 0xf7bcc87292cbdb5834056dff059768f8ea66663f5b241fbe2b0956c2fa03c4dc::community::create_gift  @0x86b54cf3a2cc6dd14561af94413a1fa98ee9f34112cb2f1d8607f91b3a7b420c  @0x2dd732cadd794c191e739d077fe282ba3c2753e79e64f1aea54bbe673a364b30 @0x223e0c9d6e816715218a10b380fb89dfa2e3e385f47803aaeef50dbdd1757aa2 '"Gift One"' '"Example gift"' --gas-budget 50000000 
