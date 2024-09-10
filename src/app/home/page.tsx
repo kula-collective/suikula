@@ -29,7 +29,8 @@ import {
 } from "@/components/sidebar";
 import { StackedLayout } from "@/components/stacked-layout";
 import { WalletDialog } from "@/components/wallet-dialog";
-import { useAppStateStore } from "@/store/zustand";
+import { useAppstateStore } from "@/providers/appstate-store-provider";
+
 import {
   ArrowRightStartOnRectangleIcon,
   ChevronDownIcon,
@@ -52,7 +53,7 @@ export default function Home() {
   const enokiFlow = useEnokiFlow();
   const [isWalletDialogOpen, setWalletDialogOpen] = useState(false);
   const [isCreateKulaDialogOpen, setCreateKulaDialogOpen] = useState(false);
-  const { user } = useAppStateStore();
+  const { user } = useAppstateStore((state) => state);
 
   function TeamDropdownMenu() {
     return (
