@@ -3,12 +3,14 @@
 import { verifyGoogle } from "@/lib/actions";
 import { useAppstateStore } from "@/providers/appstate-store-provider";
 import { useAuthCallback } from "@mysten/enoki/react";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Auth() {
   const { handled } = useAuthCallback();
   const [token, setToken] = useState<string>();
   const { login } = useAppstateStore((state) => state);
+  const router = useRouter();
 
   useEffect(() => {
     // Store the token in state because it sometimes disappears
@@ -22,15 +24,14 @@ export default function Auth() {
         .then((user) => {
           console.log("user", user);
           login(user);
-
-          window.location.href = "/home?id=" + user.id;
+          router.push('/home?id=" + user.id');
         })
         .catch((err) => {
           // TODO Display error
           console.error("Failed to verify token", err);
         });
     }
-  }, [handled, token, login]);
+  }, [handled, token, login, router]);
 
   return (
     <>
