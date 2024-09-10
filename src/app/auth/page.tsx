@@ -1,6 +1,6 @@
 "use client";
 
-import { verifyGoogle } from "@/app/lib/actions";
+import { verifyGoogle } from "@/lib/actions";
 import { useAuthCallback } from "@mysten/enoki/react";
 import { useEffect, useState } from "react";
 
