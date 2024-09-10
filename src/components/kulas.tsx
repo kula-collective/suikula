@@ -2,9 +2,10 @@
 
 import Link from "next/link";
 // import { useRouter } from "next/navigation";
+import { DropdownItem, DropdownLabel } from "@/components/dropdown";
+import { useGetKulas } from "@/hooks/useGetKulas";
+import { useSuiClient } from "@/hooks/useSuiClient";
 import { useEffect } from "react";
-import { useGetKulas } from "../hooks/useGetKulas";
-import { useSuiClient } from "../hooks/useSuiClient";
 
 interface Props {
   isDetailed?: boolean | false;
@@ -71,10 +72,13 @@ export const Kulas = ({ isDetailed }: Props) => {
     <div className="container">
       {kulaList.length > 0 ? (
         <ul>
+          {/* TODO: Don't force to be in a DropdownList */}
           {kulaList.map((kula) => (
-            <li key={kula.id}>
-              <Link href={`/kulas/${kula.id}`}>{kula.name}</Link>
-            </li>
+            <DropdownItem key={kula.id}>
+              <Link href={`/kulas/${kula.id}`}>
+                <DropdownLabel>{kula.name}</DropdownLabel>
+              </Link>
+            </DropdownItem>
           ))}
         </ul>
       ) : (

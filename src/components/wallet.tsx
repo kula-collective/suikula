@@ -12,5 +12,5 @@ export default function Wallet() {
     setAddress(state.value?.address);
   }, [enokiFlow.$zkLoginState]);
 
-  return <div>Your wallet: {address}</div>;
+  return <span>{address}</span>;
 }

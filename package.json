@@ -9,24 +9,32 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^2.1.6",
+    "@heroicons/react": "^2.1.5",
     "@mysten/dapp-kit": "^0.14.14",
     "@mysten/enoki": "^0.3.13",
     "@mysten/sui": "^1.4.0",
+    "clsx": "^2.1.1",
+    "framer-motion": "^11.5.4",
     "google-auth-library": "^9.13.0",
+    "install": "^0.13.0",
     "next": "14.2.5",
+    "npm": "^10.8.3",
     "react": "^18",
     "react-dom": "^18",
     "react-hot-toast": "^2.4.1",
     "server-only": "^0.0.1"
   },
   "devDependencies": {
+    "@tailwindcss/forms": "^0.5.9",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "autoprefixer": "^10.4.20",
     "eslint": "^8",
     "eslint-config-next": "14.2.5",
-    "postcss": "^8",
-    "tailwindcss": "^3.4.1",
+    "postcss": "^8.4.41",
+    "tailwindcss": "^3.4.10",
     "typescript": "^5"
   }
 }
