@@ -55,6 +55,8 @@ export default function Home() {
   const [isCreateKulaDialogOpen, setCreateKulaDialogOpen] = useState(false);
   const { authUser } = useAppstateStore((state) => state);
 
+  console.log("authUser", authUser);
+
   function TeamDropdownMenu() {
     return (
       <DropdownMenu className="min-w-80 lg:min-w-64" anchor="bottom start">
@@ -122,7 +124,7 @@ export default function Home() {
               </NavbarItem>
               <Dropdown>
                 <DropdownButton as={NavbarItem}>
-                  {authUser?.firstName}
+                  &quot;{authUser?.firstName}&quot;
                   <Avatar
                     src={authUser?.pic ?? "https://placecats.com/g/100/100"}
                     square

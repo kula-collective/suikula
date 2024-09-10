@@ -21,7 +21,7 @@ export const createAppstateStore = (
 ) => {
   return createStore<AppstateStore>()((set) => ({
     ...initState,
-    login: (user: User) => set((state) => ({ ...state, authUser: user })),
-    logout: () => set((state) => ({ ...state, authUser: null })),
+    login: (user: User) => set((state) => ({ authUser: user })),
+    logout: () => set((state) => ({ authUser: null })),
   }));
 };
