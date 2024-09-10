@@ -30,7 +30,7 @@ export default function Auth() {
           console.error("Failed to verify token", err);
         });
     }
-  }, [handled, token, login, storedUser]);
+  }, [handled, token, login]);
 
   return (
     <>
