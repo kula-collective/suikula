@@ -84,7 +84,7 @@ export default function Home() {
 
   const handleClick = () => {
     enokiFlow.logout().then(() => {
-      window.location.href = "/signin";
+      window.location.href = "/";
     });
   };
 
@@ -151,7 +151,7 @@ export default function Home() {
               <Dropdown>
                 <DropdownButton as={SidebarItem} className="lg:mb-2.5">
                   <Avatar src="/catalyst.svg" />
-                  <SidebarLabel>Tailwind Labs</SidebarLabel>
+                  <SidebarLabel>Kula Collective</SidebarLabel>
                   <ChevronDownIcon />
                 </DropdownButton>
                 <TeamDropdownMenu />
