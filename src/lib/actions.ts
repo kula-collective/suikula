@@ -1,6 +1,6 @@
 "use server";
 
-import { User } from "../types/user";
+import { User } from "@/types/user";
 
 export async function verifyGoogle(token: string) {
   try {

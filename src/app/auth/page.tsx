@@ -28,7 +28,7 @@ export default function Auth() {
           console.error("Failed to verify token", err);
         });
     }
-  }, [handled]);
+  }, [handled, token]);
 
   return (
     <>
