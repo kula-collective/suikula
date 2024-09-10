@@ -53,7 +53,7 @@ export default function Home() {
   const enokiFlow = useEnokiFlow();
   const [isWalletDialogOpen, setWalletDialogOpen] = useState(false);
   const [isCreateKulaDialogOpen, setCreateKulaDialogOpen] = useState(false);
-  const { user } = useAppstateStore((state) => state);
+  const { authUser } = useAppstateStore((state) => state);
 
   function TeamDropdownMenu() {
     return (
@@ -122,8 +122,9 @@ export default function Home() {
               </NavbarItem>
               <Dropdown>
                 <DropdownButton as={NavbarItem}>
+                  {authUser?.firstName}
                   <Avatar
-                    src={user?.pic ?? "https://placecats.com/g/100/100"}
+                    src={authUser?.pic ?? "https://placecats.com/g/100/100"}
                     square
                   />
                 </DropdownButton>

@@ -1,4 +1,4 @@
-// src/providers/counter-store-provider.tsx
+// src/providers/appstate-store-provider.tsx
 "use client";
 
 import { type ReactNode, createContext, useContext, useRef } from "react";
@@ -37,13 +37,13 @@ export const AppstateStoreProvider = ({
 export const useAppstateStore = <T,>(
   selector: (store: AppstateStore) => T
 ): T => {
-  const counterStoreContext = useContext(AppstateStoreContext);
+  const appstateStoreContext = useContext(AppstateStoreContext);
 
-  if (!counterStoreContext) {
+  if (!appstateStoreContext) {
     throw new Error(
       `useAppstateStore must be used within AppstateStoreProvider`
     );
   }
 
-  return useStore(counterStoreContext, selector);
+  return useStore(appstateStoreContext, selector);
 };

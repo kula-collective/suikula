@@ -2,7 +2,7 @@ import { User } from "@/types/user";
 import { createStore } from "zustand/vanilla";
 
 export type AppstateState = {
-  user: User | null;
+  authUser: User | null;
 };
 
 export type AppstateActions = {
@@ -13,7 +13,7 @@ export type AppstateActions = {
 export type AppstateStore = AppstateState & AppstateActions;
 
 export const defaultInitState: AppstateState = {
-  user: null,
+  authUser: null,
 };
 
 export const createAppstateStore = (
@@ -21,7 +21,7 @@ export const createAppstateStore = (
 ) => {
   return createStore<AppstateStore>()((set) => ({
     ...initState,
-    login: (user: User) => set((state) => ({ user })),
-    logout: () => set((state) => ({ user: null })),
+    login: (user: User) => set((state) => ({ ...state, authUser: user })),
+    logout: () => set((state) => ({ ...state, authUser: null })),
   }));
 };
