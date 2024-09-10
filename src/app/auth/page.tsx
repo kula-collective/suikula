@@ -22,7 +22,6 @@ export default function Auth() {
     if (handled && token) {
       verifyGoogle(token)
         .then((user) => {
-          console.log("user", user);
           login(user);
           router.push('/home?id=" + user.id');
         })

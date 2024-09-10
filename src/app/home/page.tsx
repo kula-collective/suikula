@@ -30,7 +30,6 @@ import {
 import { StackedLayout } from "@/components/stacked-layout";
 import { WalletDialog } from "@/components/wallet-dialog";
 import { useAppstateStore } from "@/providers/appstate-store-provider";
-
 import {
   ArrowRightStartOnRectangleIcon,
   ChevronDownIcon,
@@ -41,6 +40,7 @@ import {
 } from "@heroicons/react/16/solid";
 import { InboxIcon, MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import { useEnokiFlow } from "@mysten/enoki/react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const navItems = [
@@ -53,9 +53,8 @@ export default function Home() {
   const enokiFlow = useEnokiFlow();
   const [isWalletDialogOpen, setWalletDialogOpen] = useState(false);
   const [isCreateKulaDialogOpen, setCreateKulaDialogOpen] = useState(false);
-  const { authUser } = useAppstateStore((state) => state);
-
-  console.log("authUser", authUser);
+  const { authUser, logout } = useAppstateStore((state) => state);
+  const router = useRouter();
 
   function TeamDropdownMenu() {
     return (
@@ -87,9 +86,10 @@ export default function Home() {
     );
   }
 
-  const handleClick = () => {
+  const handleSignOut = () => {
     enokiFlow.logout().then(() => {
-      window.location.href = "/";
+      logout();
+      router.push("/");
     });
   };
 
@@ -145,7 +145,7 @@ export default function Home() {
                     <DropdownLabel>Wallet</DropdownLabel>
                   </DropdownItem>
                   <DropdownDivider />
-                  <DropdownItem onClick={handleClick}>
+                  <DropdownItem onClick={handleSignOut}>
                     <ArrowRightStartOnRectangleIcon />
                     <DropdownLabel>Sign out</DropdownLabel>
                   </DropdownItem>
