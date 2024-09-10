@@ -23,7 +23,7 @@ export default function Auth() {
       verifyGoogle(token)
         .then((user) => {
           login(user);
-          router.push('/home?id=" + user.id');
+          router.push(`/home?id=${user.id}`);
         })
         .catch((err) => {
           // TODO Display error
