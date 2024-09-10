@@ -1,12 +1,14 @@
 "use client";
 
 import { verifyGoogle } from "@/lib/actions";
+import { useAppStateStore } from "@/store/zustand";
 import { useAuthCallback } from "@mysten/enoki/react";
 import { useEffect, useState } from "react";
 
 export default function Auth() {
   const { handled } = useAuthCallback();
   const [token, setToken] = useState<string>();
+  const { login: storeLogin } = useAppStateStore();
 
   useEffect(() => {
     // Store the token in state because it sometimes disappears
@@ -19,7 +21,7 @@ export default function Auth() {
       verifyGoogle(token)
         .then((user) => {
           console.log("user", user);
-          // TODO store user
+          storeLogin(user);
 
           window.location.href = "/home?id=" + user.id;
         })
@@ -28,7 +30,7 @@ export default function Auth() {
           console.error("Failed to verify token", err);
         });
     }
-  }, [handled, token]);
+  }, [handled, token, storeLogin]);
 
   return (
     <>

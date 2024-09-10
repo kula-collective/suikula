@@ -29,6 +29,7 @@ import {
 } from "@/components/sidebar";
 import { StackedLayout } from "@/components/stacked-layout";
 import { WalletDialog } from "@/components/wallet-dialog";
+import { useAppStateStore } from "@/store/zustand";
 import {
   ArrowRightStartOnRectangleIcon,
   ChevronDownIcon,
@@ -51,6 +52,7 @@ export default function Home() {
   const enokiFlow = useEnokiFlow();
   const [isWalletDialogOpen, setWalletDialogOpen] = useState(false);
   const [isCreateKulaDialogOpen, setCreateKulaDialogOpen] = useState(false);
+  const { user } = useAppStateStore();
 
   function TeamDropdownMenu() {
     return (
@@ -119,7 +121,10 @@ export default function Home() {
               </NavbarItem>
               <Dropdown>
                 <DropdownButton as={NavbarItem}>
-                  <Avatar src="/shawn.jpg" square />
+                  <Avatar
+                    src={user?.pic ?? "https://placecats.com/g/100/100"}
+                    square
+                  />
                 </DropdownButton>
                 <DropdownMenu className="min-w-64" anchor="bottom end">
                   <DropdownItem href="/my-profile">
