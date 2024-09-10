@@ -1,7 +1,7 @@
 "use client";
 
 import { Avatar } from "@/components/avatar";
-import CreateKulaButton from "@/components/create-kula-button";
+import CreateKulaDialog from "@/components/create-kula-dialog";
 import {
   Dropdown,
   DropdownButton,
@@ -33,9 +33,7 @@ import {
   ArrowRightStartOnRectangleIcon,
   ChevronDownIcon,
   Cog8ToothIcon,
-  LightBulbIcon,
   PlusIcon,
-  ShieldCheckIcon,
   UserIcon,
   WalletIcon,
 } from "@heroicons/react/16/solid";
@@ -46,46 +44,43 @@ import { useState } from "react";
 const navItems = [
   { label: "Home", url: "/" },
   { label: "Events", url: "/events" },
-  { label: "Orders", url: "/orders" },
-  { label: "Broadcasts", url: "/broadcasts" },
   { label: "Settings", url: "/settings" },
 ];
-
-function TeamDropdownMenu() {
-  return (
-    <DropdownMenu className="min-w-80 lg:min-w-64" anchor="bottom start">
-      <DropdownItem href="/teams/1/settings">
-        <Cog8ToothIcon />
-        <DropdownLabel>Settings</DropdownLabel>
-      </DropdownItem>
-      <DropdownDivider />
-      <Kulas />
-      {/* <DropdownItem href="/teams/1">
-        <Avatar slot="icon" src="/tailwind-logo.svg" />
-        <DropdownLabel>Tailwind Labs</DropdownLabel>
-      </DropdownItem>
-      <DropdownItem href="/teams/2">
-        <Avatar
-          slot="icon"
-          initials="WC"
-          className="bg-purple-500 text-white"
-        />
-        <DropdownLabel>Workcation</DropdownLabel>
-      </DropdownItem> */}
-      <DropdownDivider />
-      <DropdownItem>
-        <PlusIcon />
-        <DropdownLabel>
-          <CreateKulaButton>New kula&hellip;</CreateKulaButton>
-        </DropdownLabel>
-      </DropdownItem>
-    </DropdownMenu>
-  );
-}
 
 export default function Home() {
   const enokiFlow = useEnokiFlow();
   const [isWalletDialogOpen, setWalletDialogOpen] = useState(false);
+  const [isCreateKulaDialogOpen, setCreateKulaDialogOpen] = useState(false);
+
+  function TeamDropdownMenu() {
+    return (
+      <DropdownMenu className="min-w-80 lg:min-w-64" anchor="bottom start">
+        <DropdownItem href="/teams/1/settings">
+          <Cog8ToothIcon />
+          <DropdownLabel>Settings</DropdownLabel>
+        </DropdownItem>
+        <DropdownDivider />
+        <Kulas />
+        {/* <DropdownItem href="/teams/1">
+          <Avatar slot="icon" src="/tailwind-logo.svg" />
+          <DropdownLabel>Tailwind Labs</DropdownLabel>
+        </DropdownItem>
+        <DropdownItem href="/teams/2">
+          <Avatar
+            slot="icon"
+            initials="WC"
+            className="bg-purple-500 text-white"
+          />
+          <DropdownLabel>Workcation</DropdownLabel>
+        </DropdownItem> */}
+        <DropdownDivider />
+        <DropdownItem onClick={() => setCreateKulaDialogOpen(true)}>
+          <PlusIcon />
+          <DropdownLabel>New kula&hellip;</DropdownLabel>
+        </DropdownItem>
+      </DropdownMenu>
+    );
+  }
 
   const handleClick = () => {
     enokiFlow.logout().then(() => {
@@ -136,14 +131,6 @@ export default function Home() {
                     <DropdownLabel>Settings</DropdownLabel>
                   </DropdownItem>
                   <DropdownDivider />
-                  <DropdownItem href="/privacy-policy">
-                    <ShieldCheckIcon />
-                    <DropdownLabel>Privacy policy</DropdownLabel>
-                  </DropdownItem>
-                  <DropdownItem href="/share-feedback">
-                    <LightBulbIcon />
-                    <DropdownLabel>Share feedback</DropdownLabel>
-                  </DropdownItem>
                   <DropdownItem onClick={() => setWalletDialogOpen(true)}>
                     <WalletIcon />
                     <DropdownLabel>Wallet</DropdownLabel>
@@ -160,11 +147,10 @@ export default function Home() {
         }
         sidebar={
           <Sidebar>
-            {" "}
             <SidebarHeader>
               <Dropdown>
                 <DropdownButton as={SidebarItem} className="lg:mb-2.5">
-                  <Avatar src="/tailwind-logo.svg" />
+                  <Avatar src="/catalyst.svg" />
                   <SidebarLabel>Tailwind Labs</SidebarLabel>
                   <ChevronDownIcon />
                 </DropdownButton>
@@ -186,6 +172,10 @@ export default function Home() {
       <WalletDialog
         isOpen={isWalletDialogOpen}
         setIsOpen={setWalletDialogOpen}
+      />
+      <CreateKulaDialog
+        isOpen={isCreateKulaDialogOpen}
+        setIsOpen={setCreateKulaDialogOpen}
       />
     </>
   );

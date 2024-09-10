@@ -1,7 +1,7 @@
+import { Kula } from "@/types/kula";
 import { SuiGraphQLClient } from "@mysten/sui/graphql";
 import { graphql } from "@mysten/sui/graphql/schemas/2024.4";
 import { useEffect, useState } from "react";
-import { Kula } from "../types/kula";
 import { useSuiClient } from "./useSuiClient";
 
 export const useGetKulas = () => {
