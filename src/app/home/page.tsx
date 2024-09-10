@@ -124,7 +124,6 @@ export default function Home() {
               </NavbarItem>
               <Dropdown>
                 <DropdownButton as={NavbarItem}>
-                  &quot;{authUser?.firstName}&quot;
                   <Avatar
                     src={authUser?.pic ?? "https://placecats.com/g/100/100"}
                     square
