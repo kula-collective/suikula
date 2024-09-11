@@ -2,15 +2,15 @@
 
 import { useRouter } from "next/navigation";
 
-import { Dialog } from "@/components/dialog";
-import { Login } from "@/components/login";
+import { Dialog } from "@/components/catalyst/dialog";
+import CreateKula from "@/components/create-kula";
 
 export default function Page() {
   const router = useRouter();
 
   return (
     <Dialog open={true} onClose={() => router.back()}>
-      <Login />
+      <CreateKula />
     </Dialog>
   );
 }

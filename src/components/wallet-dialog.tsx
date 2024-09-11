@@ -1,5 +1,10 @@
-import { Button } from "./button";
-import { Dialog, DialogActions, DialogBody, DialogTitle } from "./dialog";
+import { Button } from "./catalyst/button";
+import {
+  Dialog,
+  DialogActions,
+  DialogBody,
+  DialogTitle,
+} from "./catalyst/dialog";
 import Wallet from "./wallet";
 
 export interface DialogProps {

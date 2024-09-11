@@ -1,7 +1,7 @@
 import Link from "next/link";
 // import { useRouter } from "next/navigation";
 import { getKulas } from "@/actions";
-import { DropdownItem, DropdownLabel } from "@/components/dropdown";
+import { DropdownItem, DropdownLabel } from "@/components/catalyst/dropdown";
 
 interface Props {
   isDetailed?: boolean | false;

@@ -2,8 +2,8 @@
 
 import { useRouter } from "next/navigation";
 
-import { Dialog } from "@/components/dialog";
-import { Login } from "@/components/login";
+import { Dialog } from "@/components/catalyst/dialog";
+import { Login } from "@/components/catalyst/login";
 
 export default function Page() {
   const router = useRouter();

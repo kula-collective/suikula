@@ -1,6 +1,6 @@
 "use client";
 
-import { Avatar } from "@/components/avatar";
+import { Avatar } from "@/components/catalyst/avatar";
 import {
   Dropdown,
   DropdownButton,
@@ -8,8 +8,8 @@ import {
   DropdownItem,
   DropdownLabel,
   DropdownMenu,
-} from "@/components/dropdown";
-import { NavbarItem } from "@/components/navbar";
+} from "@/components/catalyst/dropdown";
+import { NavbarItem } from "@/components/catalyst/navbar";
 import { useAppstateStore } from "@/providers/appstate-store-provider";
 import {
   ArrowRightStartOnRectangleIcon,

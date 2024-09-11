@@ -1,4 +1,4 @@
-import { Avatar } from "@/components/avatar";
+import { Avatar } from "@/components/catalyst/avatar";
 import {
   Dropdown,
   DropdownButton,
@@ -6,8 +6,8 @@ import {
   DropdownItem,
   DropdownLabel,
   DropdownMenu,
-} from "@/components/dropdown";
-import { Kulas } from "@/components/kulas";
+} from "@/components/catalyst/dropdown";
+import { Kulas } from "@/components/catalyst/kulas";
 import {
   Navbar,
   NavbarDivider,
@@ -15,7 +15,7 @@ import {
   NavbarLabel,
   NavbarSection,
   NavbarSpacer,
-} from "@/components/navbar";
+} from "@/components/catalyst/navbar";
 import {
   Sidebar,
   SidebarBody,
@@ -23,8 +23,8 @@ import {
   SidebarItem,
   SidebarLabel,
   SidebarSection,
-} from "@/components/sidebar";
-import { StackedLayout } from "@/components/stacked-layout";
+} from "@/components/catalyst/sidebar";
+import { StackedLayout } from "@/components/catalyst/stacked-layout";
 import { ToolbarDropdown } from "@/components/toolbar-dropdown";
 import { ChevronDownIcon, Cog8ToothIcon } from "@heroicons/react/16/solid";
 import { InboxIcon, MagnifyingGlassIcon } from "@heroicons/react/20/solid";

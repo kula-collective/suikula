@@ -1,12 +1,12 @@
-import { Badge } from "@/components/badge";
-import { Divider } from "@/components/divider";
+import { Badge } from "@/components/catalyst/badge";
+import { Divider } from "@/components/catalyst/divider";
 import {
   Dropdown,
   DropdownButton,
   DropdownItem,
   DropdownMenu,
-} from "@/components/dropdown";
-import { Link } from "@/components/link";
+} from "@/components/catalyst/dropdown";
+import { Link } from "@/components/catalyst/link";
 import { getOffers } from "@/data";
 import { EllipsisVerticalIcon } from "@heroicons/react/16/solid";
 import { MapPinIcon } from "@heroicons/react/20/solid";
