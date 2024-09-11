@@ -36,12 +36,10 @@ export default function CreateKula() {
         </Field>
       </DialogBody>
       <DialogActions>
-        <Button plain onClick={() => setIsOpen(false)}>
+        {/* <Button plain onClick={() => setIsOpen(false)}>
           Cancel
-        </Button>
-        <Button type="submit" onClick={() => setIsOpen(false)}>
-          Create
-        </Button>
+        </Button> */}
+        <Button type="submit">Create</Button>
       </DialogActions>
     </form>
   );

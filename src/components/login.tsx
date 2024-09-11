@@ -4,7 +4,7 @@ import { GoogleSignInButton } from "./google-signin-button";
 
 import { verifyGoogle } from "@/lib/actions";
 import { useAppstateStore } from "@/providers/appstate-store-provider";
-import { EnokiFlowProvider, useAuthCallback } from "@mysten/enoki/react";
+import { useAuthCallback } from "@mysten/enoki/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -35,41 +35,39 @@ export function Login() {
   }, [handled, token, login, router]);
 
   return (
-    <>
-      <EnokiFlowProvider apiKey={process.env.NEXT_PUBLIC_ENOKI_API_KEY!}>
-        <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">
-          <div className="sm:mx-auto sm:w-full sm:max-w-md">
-            <img
-              alt="Kula Collective"
-              src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-              className="mx-auto h-10 w-auto"
-            />
-            <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-              Sign in to your account
-            </h2>
-          </div>
+    <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">
+      <div className="sm:mx-auto sm:w-full sm:max-w-md">
+        <img
+          alt="Kula Collective"
+          src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+          className="mx-auto h-10 w-auto"
+        />
+        <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+          Sign in to your account
+        </h2>
+      </div>
 
-          <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
-            <div className="bg-white px-6 py-10 shadow sm:rounded-lg sm:px-12">
-              <div>
-                <div className="relative">
-                  <div
-                    aria-hidden="true"
-                    className="absolute inset-0 flex items-center"
-                  >
-                    <div className="w-full border-t border-gray-200" />
-                  </div>
-                  <div className="relative flex justify-center text-sm font-medium leading-6">
-                    <span className="bg-white px-6 text-gray-900">
-                      Sign in with ZKLogin
-                    </span>
-                  </div>
-                </div>
+      <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
+        <div className="bg-white px-6 py-10 shadow sm:rounded-lg sm:px-12">
+          <div>
+            <div className="relative">
+              <div
+                aria-hidden="true"
+                className="absolute inset-0 flex items-center"
+              >
+                <div className="w-full border-t border-gray-200" />
+              </div>
+              <div className="relative flex justify-center text-sm font-medium leading-6">
+                <span className="bg-white px-6 text-gray-900">
+                  Sign in with ZKLogin
+                </span>
+              </div>
+            </div>
 
-                <div className="mt-6 grid grid-cols-2 gap-4">
-                  <GoogleSignInButton />
+            <div className="mt-6 grid grid-cols-2 gap-4">
+              <GoogleSignInButton />
 
-                  {/* <a
+              {/* <a
                   href="#"
                   className="flex w-full items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:ring-transparent"
                 >
@@ -89,12 +87,10 @@ export function Login() {
                     GitHub
                   </span>
                 </a> */}
-                </div>
-              </div>
             </div>
           </div>
         </div>
-      </EnokiFlowProvider>
-    </>
+      </div>
+    </div>
   );
 }

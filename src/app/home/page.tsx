@@ -7,7 +7,6 @@ import {
   DropdownLabel,
   DropdownMenu,
 } from "@/components/catalyst/dropdown";
-import { Kulas } from "@/components/catalyst/kulas";
 import {
   Navbar,
   NavbarDivider,
@@ -25,6 +24,7 @@ import {
   SidebarSection,
 } from "@/components/catalyst/sidebar";
 import { StackedLayout } from "@/components/catalyst/stacked-layout";
+import { Kulas } from "@/components/kulas";
 import { ToolbarDropdown } from "@/components/toolbar-dropdown";
 import { ChevronDownIcon, Cog8ToothIcon } from "@heroicons/react/16/solid";
 import { InboxIcon, MagnifyingGlassIcon } from "@heroicons/react/20/solid";

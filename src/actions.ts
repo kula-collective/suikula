@@ -1,5 +1,5 @@
 import { Kula } from "@/types/kula";
-import { useEnokiFlow } from "@mysten/enoki/react";
+// import { useEnokiFlow } from "@mysten/enoki/react";
 import { getFullnodeUrl, SuiClient } from "@mysten/sui/client";
 import { SuiGraphQLClient } from "@mysten/sui/graphql";
 import { graphql } from "@mysten/sui/graphql/schemas/2024.4";
@@ -78,44 +78,43 @@ const handleSignAndExecuteTransaction = async (
   operation: String,
   setIsLoading: any
 ) => {
-  const enokiFlow = useEnokiFlow();
-
-  return enokiFlow
-    .getKeypair({ network: "testnet" })
-    .then((keypair) => {
-      return createSuiClient()
-        .signAndExecuteTransaction({
-          signer: keypair,
-          transaction: tx,
-          requestType: "WaitForLocalExecution",
-          options: {
-            showEffects: true,
-            showEvents: true,
-          },
-        })
-        .then((resp) => {
-          setIsLoading(false);
-          console.log(resp);
-          if (resp.effects?.status.status === "success") {
-            console.log(`${operation} operation successful`);
-            // toast.success(`${operation} operation successful`);
-            return resp.effects;
-          } else {
-            console.log(`${operation} operation failed`);
-            // toast.error(`${operation} operation failed.`);
-            return;
-          }
-        })
-        .catch((err) => {
-          setIsLoading(false);
-          console.log(`${operation} operation failed`);
-          console.log(`${operation} error : `, err);
-          // toast.error(`Something went wrong, ${operation} operation failed.`);
-        });
-    })
-    .catch((err: any) => {
-      setIsLoading(false);
-      console.log(`signing goes wrong ${operation} error : `, err);
-      // toast.error(`signing goes wrong, ${operation} operation failed.`);
-    }); // <-- added missing semicolon here
+  // const enokiFlow = useEnokiFlow();
+  // return enokiFlow
+  //   .getKeypair({ network: "testnet" })
+  //   .then((keypair) => {
+  //     return createSuiClient()
+  //       .signAndExecuteTransaction({
+  //         signer: keypair,
+  //         transaction: tx,
+  //         requestType: "WaitForLocalExecution",
+  //         options: {
+  //           showEffects: true,
+  //           showEvents: true,
+  //         },
+  //       })
+  //       .then((resp) => {
+  //         setIsLoading(false);
+  //         console.log(resp);
+  //         if (resp.effects?.status.status === "success") {
+  //           console.log(`${operation} operation successful`);
+  //           // toast.success(`${operation} operation successful`);
+  //           return resp.effects;
+  //         } else {
+  //           console.log(`${operation} operation failed`);
+  //           // toast.error(`${operation} operation failed.`);
+  //           return;
+  //         }
+  //       })
+  //       .catch((err) => {
+  //         setIsLoading(false);
+  //         console.log(`${operation} operation failed`);
+  //         console.log(`${operation} error : `, err);
+  //         // toast.error(`Something went wrong, ${operation} operation failed.`);
+  //       });
+  //   })
+  //   .catch((err: any) => {
+  //     setIsLoading(false);
+  //     console.log(`signing goes wrong ${operation} error : `, err);
+  //     // toast.error(`signing goes wrong, ${operation} operation failed.`);
+  //   }); // <-- added missing semicolon here
 };

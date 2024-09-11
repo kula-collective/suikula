@@ -27,8 +27,7 @@ import {
   SidebarSpacer,
 } from "@/components/catalyst/sidebar";
 import { SidebarLayout } from "@/components/catalyst/sidebar-layout";
-import CreateKulaDialog from "@/components/create-kula-dialog";
-import { WalletDialog } from "@/components/wallet-dialog";
+// import { WalletDialog } from "@/components/wallet-dialog";
 import { useAppstateStore } from "@/providers/appstate-store-provider";
 import {
   ArrowRightStartOnRectangleIcon,
@@ -45,7 +44,6 @@ import {
   HomeIcon,
   QuestionMarkCircleIcon,
   SparklesIcon,
-  Square2StackIcon,
 } from "@heroicons/react/20/solid";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -146,7 +144,7 @@ export function ApplicationLayout({
                   <DropdownLabel>South Austin</DropdownLabel>
                 </DropdownItem> */}
                 <DropdownDivider />
-                <DropdownItem href="#">
+                <DropdownItem href="/create-kula">
                   <PlusIcon />
                   <DropdownLabel>New Kula&hellip;</DropdownLabel>
                 </DropdownItem>
@@ -160,13 +158,13 @@ export function ApplicationLayout({
                 <HomeIcon />
                 <SidebarLabel>Home</SidebarLabel>
               </SidebarItem>
-              <SidebarItem
+              {/* <SidebarItem
                 href="/offers"
                 current={pathname.startsWith("/offers")}
               >
                 <Square2StackIcon />
                 <SidebarLabel>Offers</SidebarLabel>
-              </SidebarItem>
+              </SidebarItem> */}
               <SidebarItem
                 href="/settings"
                 current={pathname.startsWith("/settings")}
@@ -201,44 +199,44 @@ export function ApplicationLayout({
 
           <SidebarFooter className="max-lg:hidden">
             <Dropdown>
-              <DropdownButton as={SidebarItem}>
-                {authUser && (
-                  <>
-                    <span className="flex min-w-0 items-center gap-3">
-                      <Avatar
-                        src={authUser.pic}
-                        className="size-10"
-                        square
-                        alt=""
-                      />
-                      <span className="min-w-0">
-                        <span className="block truncate text-sm/5 font-medium text-zinc-950 dark:text-white">
-                          {authUser.firstName}
-                        </span>
-                        <span className="block truncate text-xs/5 font-normal text-zinc-500 dark:text-zinc-400">
-                          {authUser.email}
-                        </span>
+              {authUser ? (
+                <DropdownButton as={SidebarItem}>
+                  <span className="flex min-w-0 items-center gap-3">
+                    <Avatar
+                      src={authUser.pic}
+                      className="size-10"
+                      square
+                      alt=""
+                    />
+                    <span className="min-w-0">
+                      <span className="block truncate text-sm/5 font-medium text-zinc-950 dark:text-white">
+                        {authUser.firstName}
+                      </span>
+                      <span className="block truncate text-xs/5 font-normal text-zinc-500 dark:text-zinc-400">
+                        {authUser.email}
                       </span>
                     </span>
-                    <ChevronUpIcon />
-                  </>
-                )}
-                {!authUser && <Link href="/login">Login</Link>}
-              </DropdownButton>
+                  </span>
+                  <ChevronUpIcon />
+                </DropdownButton>
+              ) : (
+                <Link href="/login">Login</Link>
+              )}
+
               <AccountDropdownMenu anchor="top start" />
             </Dropdown>
           </SidebarFooter>
         </Sidebar>
       }
     >
-      <WalletDialog
+      {/* <WalletDialog
         isOpen={isWalletDialogOpen}
         setIsOpen={setWalletDialogOpen}
       />
       <CreateKulaDialog
         isOpen={isCreateKulaDialogOpen}
         setIsOpen={setCreateKulaDialogOpen}
-      />
+      /> */}
       <main>{children}</main>
     </SidebarLayout>
   );

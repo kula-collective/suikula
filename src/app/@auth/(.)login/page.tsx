@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 
 import { Dialog } from "@/components/catalyst/dialog";
-import { Login } from "@/components/catalyst/login";
+import { Login } from "@/components/login";
 
 export default function Page() {
   const router = useRouter();
