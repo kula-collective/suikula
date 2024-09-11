@@ -18,7 +18,7 @@
     "framer-motion": "^11.5.4",
     "google-auth-library": "^9.13.0",
     "install": "^0.13.0",
-    "next": "14.2.5",
+    "next": "^14.2.9",
     "npm": "^10.8.3",
     "react": "^18",
     "react-dom": "^18",
