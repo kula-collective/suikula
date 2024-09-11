@@ -1,7 +1,4 @@
-"use client";
-
 import { Avatar } from "@/components/avatar";
-import CreateKulaDialog from "@/components/create-kula-dialog";
 import {
   Dropdown,
   DropdownButton,
@@ -28,20 +25,9 @@ import {
   SidebarSection,
 } from "@/components/sidebar";
 import { StackedLayout } from "@/components/stacked-layout";
-import { WalletDialog } from "@/components/wallet-dialog";
-import { useAppstateStore } from "@/providers/appstate-store-provider";
-import {
-  ArrowRightStartOnRectangleIcon,
-  ChevronDownIcon,
-  Cog8ToothIcon,
-  PlusIcon,
-  UserIcon,
-  WalletIcon,
-} from "@heroicons/react/16/solid";
+import { ToolbarDropdown } from "@/components/toolbar-dropdown";
+import { ChevronDownIcon, Cog8ToothIcon } from "@heroicons/react/16/solid";
 import { InboxIcon, MagnifyingGlassIcon } from "@heroicons/react/20/solid";
-import { useEnokiFlow } from "@mysten/enoki/react";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
 
 const navItems = [
   { label: "Home", url: "/" },
@@ -49,13 +35,7 @@ const navItems = [
   { label: "Settings", url: "/settings" },
 ];
 
-export default function Home() {
-  const enokiFlow = useEnokiFlow();
-  const [isWalletDialogOpen, setWalletDialogOpen] = useState(false);
-  const [isCreateKulaDialogOpen, setCreateKulaDialogOpen] = useState(false);
-  const { authUser, logout } = useAppstateStore((state) => state);
-  const router = useRouter();
-
+export default function HomePage() {
   function TeamDropdownMenu() {
     return (
       <DropdownMenu className="min-w-80 lg:min-w-64" anchor="bottom start">
@@ -78,20 +58,14 @@ export default function Home() {
           <DropdownLabel>Workcation</DropdownLabel>
         </DropdownItem> */}
         <DropdownDivider />
-        <DropdownItem onClick={() => setCreateKulaDialogOpen(true)}>
+        {/* <DropdownItem onClick={() => setCreateKulaDialogOpen(true)}>
+          <Link href=
           <PlusIcon />
           <DropdownLabel>New kula&hellip;</DropdownLabel>
-        </DropdownItem>
+        </DropdownItem> */}
       </DropdownMenu>
     );
   }
-
-  const handleSignOut = () => {
-    enokiFlow.logout().then(() => {
-      logout();
-      router.push("/");
-    });
-  };
 
   return (
     <>
@@ -122,35 +96,8 @@ export default function Home() {
               <NavbarItem href="/inbox" aria-label="Inbox">
                 <InboxIcon />
               </NavbarItem>
-              <Dropdown>
-                <DropdownButton as={NavbarItem}>
-                  <Avatar
-                    src={authUser?.pic ?? "https://placecats.com/g/100/100"}
-                    square
-                  />
-                </DropdownButton>
-                <DropdownMenu className="min-w-64" anchor="bottom end">
-                  <DropdownItem href="/my-profile">
-                    <UserIcon />
-                    <DropdownLabel>My profile</DropdownLabel>
-                  </DropdownItem>
-                  <DropdownItem href="/settings">
-                    <Cog8ToothIcon />
-                    <DropdownLabel>Settings</DropdownLabel>
-                  </DropdownItem>
-                  <DropdownDivider />
-                  <DropdownItem onClick={() => setWalletDialogOpen(true)}>
-                    <WalletIcon />
-                    <DropdownLabel>Wallet</DropdownLabel>
-                  </DropdownItem>
-                  <DropdownDivider />
-                  <DropdownItem onClick={handleSignOut}>
-                    <ArrowRightStartOnRectangleIcon />
-                    <DropdownLabel>Sign out</DropdownLabel>
-                  </DropdownItem>
-                </DropdownMenu>
-              </Dropdown>
             </NavbarSection>
+            <ToolbarDropdown />
           </Navbar>
         }
         sidebar={
@@ -177,7 +124,7 @@ export default function Home() {
           </Sidebar>
         }
       ></StackedLayout>
-      <WalletDialog
+      {/* <WalletDialog
         isOpen={isWalletDialogOpen}
         setIsOpen={setWalletDialogOpen}
       />
@@ -185,6 +132,7 @@ export default function Home() {
         isOpen={isCreateKulaDialogOpen}
         setIsOpen={setCreateKulaDialogOpen}
       />
+       */}
     </>
   );
 }

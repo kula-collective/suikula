@@ -1,9 +1,8 @@
-"use client";
-
-import { EnokiFlowProvider } from "@mysten/enoki/react";
 // import type { Metadata } from "next";
 import { AppstateStoreProvider } from "@/providers/appstate-store-provider";
+import { AuthProvider } from "@/providers/auth-provider";
 import { Inter, Lexend } from "next/font/google";
+import { ApplicationLayout } from "./application-layout";
 import "./globals.css";
 
 const inter = Inter({
@@ -24,19 +23,37 @@ const lexend = Lexend({
 //   description: "The gift economy platform on Sui",
 // };
 
-export default function RootLayout({
+export default async function RootLayout({
+  auth,
+  kulas,
+  offers,
   children,
 }: Readonly<{
+  auth: React.ReactNode;
+  kulas: React.ReactNode;
+  offers: React.ReactNode;
   children: React.ReactNode;
 }>) {
   return (
-    <EnokiFlowProvider apiKey={process.env.NEXT_PUBLIC_ENOKI_API_KEY!}>
-      {/* h-full needed for SignIn */}
-      <html lang="en" className="h-full bg-gray-50">
-        <body className="h-full">
-          <AppstateStoreProvider>{children}</AppstateStoreProvider>
-        </body>
-      </html>
-    </EnokiFlowProvider>
+    <html
+      lang="en"
+      className="h-full text-zinc-950 antialiased lg:bg-zinc-100 dark:bg-zinc-900 dark:text-white dark:lg:bg-zinc-950"
+    >
+      <head>
+        <link rel="preconnect" href="https://rsms.me/" />
+        <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+      </head>
+      <body>
+        <AppstateStoreProvider>
+          <AuthProvider>
+            {/* Must pass Server Components to Client Components as Props */}
+            <ApplicationLayout kulas={kulas} offers={offers}>
+              {auth}
+              {children}
+            </ApplicationLayout>
+          </AuthProvider>
+        </AppstateStoreProvider>
+      </body>
+    </html>
   );
 }

@@ -1,5 +1,5 @@
 import Offers from "@/components/offers";
 
-export default async function HomePage() {
+export default function OffersPage() {
   return <Offers />;
 }
