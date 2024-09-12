@@ -1,6 +1,5 @@
 "use client";
 
-import { createKula } from "@/actions";
 import { Button } from "@/components/catalyst/button";
 import {
   Dialog,
@@ -11,11 +10,13 @@ import {
 } from "@/components/catalyst/dialog";
 import { Field, Label } from "@/components/catalyst/fieldset";
 import { Input } from "@/components/catalyst/input";
+import { useEnoki } from "@/hooks/use-enoki";
 import { useRouter } from "next/navigation";
 import { FormEvent } from "react";
 
 export default function CreateKulaDialog() {
   const router = useRouter();
+  const enoki = useEnoki();
 
   const onClose = () => router.back();
 
@@ -27,7 +28,7 @@ export default function CreateKulaDialog() {
     const formJson = Object.fromEntries(formData.entries());
     const kulaName = formJson["name"].toString();
 
-    await createKula(kulaName, (isLoading: boolean) => {});
+    await enoki.createKula(kulaName, (isLoading: boolean) => {});
     onClose();
   };
 

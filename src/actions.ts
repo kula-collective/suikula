@@ -6,7 +6,7 @@ import { Transaction } from "@mysten/sui/transactions";
 
 export async function getOffers() {}
 
-export async function createKula(name: string, setIsLoading: any) {
+export async function useCreateKula(name: string, setIsLoading: any) {
   const tx = new Transaction();
   tx.moveCall({
     target: `${process.env.NEXT_PUBLIC_TESTNET_KULA_PACKAGE_ID}::community::create_kula_community`,
@@ -14,7 +14,7 @@ export async function createKula(name: string, setIsLoading: any) {
   });
   setIsLoading(true);
   console.log("createKula, signing transaction block...");
-  const res = await handleSignAndExecuteTransaction(
+  const res = await useHandleSignAndExecuteTransaction(
     tx,
     "KulaCreation",
     setIsLoading
@@ -35,7 +35,7 @@ const createSuiClient = () => {
   return client;
 };
 
-const handleSignAndExecuteTransaction = async (
+const useHandleSignAndExecuteTransaction = async (
   tx: Transaction,
   operation: String,
   setIsLoading: any
