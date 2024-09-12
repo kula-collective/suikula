@@ -28,8 +28,7 @@ export default function CreateKulaDialog() {
     const formJson = Object.fromEntries(formData.entries());
     const kulaName = formJson["name"].toString();
 
-    await enoki.createKula(kulaName, (isLoading: boolean) => {});
-    onClose();
+    await enoki.createKula(kulaName);
   };
 
   return (
