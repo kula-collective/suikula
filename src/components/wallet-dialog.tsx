@@ -1,6 +1,6 @@
-"use server";
+"use client";
 
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { Button } from "./catalyst/button";
 import {
   Dialog,
@@ -11,9 +11,9 @@ import {
 import Wallet from "./wallet";
 
 export function WalletDialog() {
-  const onClose = () => {
-    redirect("/");
-  };
+  const router = useRouter();
+
+  const onClose = () => router.back();
 
   return (
     <Dialog open={true} onClose={onClose}>

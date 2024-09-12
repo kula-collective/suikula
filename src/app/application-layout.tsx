@@ -26,7 +26,6 @@ import {
   SidebarSection,
 } from "@/components/catalyst/sidebar";
 import { SidebarLayout } from "@/components/catalyst/sidebar-layout";
-// import { WalletDialog } from "@/components/wallet-dialog";
 import { useAppstateStore } from "@/providers/appstate-store-provider";
 import {
   ArrowRightStartOnRectangleIcon,
@@ -195,29 +194,30 @@ export function ApplicationLayout({
 
           <SidebarFooter className="max-lg:hidden">
             <Dropdown>
-              {authUser ? (
-                <DropdownButton as={SidebarItem}>
-                  <span className="flex min-w-0 items-center gap-3">
-                    <Avatar
-                      src={authUser.pic}
-                      className="size-10"
-                      square
-                      alt=""
-                    />
-                    <span className="min-w-0">
-                      <span className="block truncate text-sm/5 font-medium text-zinc-950 dark:text-white">
-                        {authUser.firstName}
-                      </span>
-                      <span className="block truncate text-xs/5 font-normal text-zinc-500 dark:text-zinc-400">
-                        {authUser.email}
-                      </span>
+              {/* {authUser ? ( */}
+              <DropdownButton as={SidebarItem}>
+                <span className="flex min-w-0 items-center gap-3">
+                  <Avatar
+                    src={authUser?.pic}
+                    className="size-10"
+                    square
+                    alt=""
+                  />
+                  <span className="min-w-0">
+                    <span className="block truncate text-sm/5 font-medium text-zinc-950 dark:text-white">
+                      {authUser?.firstName}
+                    </span>
+                    <span className="block truncate text-xs/5 font-normal text-zinc-500 dark:text-zinc-400">
+                      {authUser?.email}
                     </span>
                   </span>
-                  <ChevronUpIcon />
-                </DropdownButton>
-              ) : (
-                <Link href="/login">Login</Link>
-              )}
+                </span>
+                <ChevronUpIcon />
+              </DropdownButton>
+              {/* ) : ( */}
+
+              <Link href="/login">Login</Link>
+              {/* )} */}
 
               <AccountDropdownMenu anchor="top start" />
             </Dropdown>
@@ -225,14 +225,6 @@ export function ApplicationLayout({
         </Sidebar>
       }
     >
-      {/* <WalletDialog
-        isOpen={isWalletDialogOpen}
-        setIsOpen={setWalletDialogOpen}
-      />
-      <CreateKulaDialog
-        isOpen={isCreateKulaDialogOpen}
-        setIsOpen={setCreateKulaDialogOpen}
-      /> */}
       <main>{children}</main>
     </SidebarLayout>
   );
