@@ -1,5 +1,7 @@
 "use client";
 
+export const dynamic = "force-dynamic";
+
 import { verifyGoogle } from "@/lib/actions";
 import { useAppstateStore } from "@/providers/appstate-store-provider";
 import { useRouter } from "next/navigation";
