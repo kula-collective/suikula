@@ -86,7 +86,7 @@ export function ApplicationLayout({
   offers: React.ReactNode;
   children: React.ReactNode;
 }) {
-  const { authUser, logout } = useAppstateStore((state) => state);
+  const { authUser } = useAppstateStore((state) => state);
   const [isWalletDialogOpen, setWalletDialogOpen] = useState(false);
   const [isCreateKulaDialogOpen, setCreateKulaDialogOpen] = useState(false);
 

@@ -6,8 +6,8 @@ export type AppstateState = {
 };
 
 export type AppstateActions = {
-  login: (user: User) => void;
-  logout: () => void;
+  saveUser: (user: User) => void;
+  resetUser: () => void;
 };
 
 export type AppstateStore = AppstateState & AppstateActions;
@@ -21,7 +21,7 @@ export const createAppstateStore = (
 ) => {
   return createStore<AppstateStore>()((set) => ({
     ...initState,
-    login: (user: User) => set((state) => ({ authUser: user })),
-    logout: () => set((state) => ({ authUser: null })),
+    saveUser: (user: User) => set((state) => ({ authUser: user })),
+    resetUser: () => set((state) => ({ authUser: null })),
   }));
 };

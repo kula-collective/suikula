@@ -9,7 +9,7 @@ export function GoogleSignInButton() {
     const host = window.location.host;
     // Set the redirect URL to the location that should
     // handle authorization callbacks in your app
-    const redirectUrl = `${protocol}//${host}/auth`;
+    const redirectUrl = `${protocol}//${host}/api/oauth/google`;
 
     enokiFlow
       .createAuthorizationURL({
