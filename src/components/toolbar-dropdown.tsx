@@ -15,6 +15,7 @@ import {
   ArrowRightStartOnRectangleIcon,
   Cog8ToothIcon,
   UserIcon,
+  WalletIcon,
 } from "@heroicons/react/16/solid";
 import { useEnokiFlow } from "@mysten/enoki/react";
 import { redirect } from "next/navigation";
@@ -48,10 +49,10 @@ export function ToolbarDropdown() {
           <DropdownLabel>Settings</DropdownLabel>
         </DropdownItem>
         <DropdownDivider />
-        {/* <DropdownItem onClick={() => setWalletDialogOpen(true)}>
+        <DropdownItem href="/wallet">
           <WalletIcon />
           <DropdownLabel>Wallet</DropdownLabel>
-        </DropdownItem> */}
+        </DropdownItem>
         <DropdownDivider />
         <DropdownItem onClick={handleSignOut}>
           <ArrowRightStartOnRectangleIcon />

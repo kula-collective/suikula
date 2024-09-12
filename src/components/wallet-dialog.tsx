@@ -1,3 +1,4 @@
+import { DialogProps } from "@headlessui/react";
 import { Button } from "./catalyst/button";
 import {
   Dialog,
@@ -7,20 +8,20 @@ import {
 } from "./catalyst/dialog";
 import Wallet from "./wallet";
 
-export interface DialogProps {
-  isOpen: boolean;
-  setIsOpen: (isOpen: boolean) => void;
-}
+// export interface DialogProps {
+//   isOpen: boolean;
+//   setIsOpen: (open: boolean) => void;
+// }
 
-export function WalletDialog({ isOpen, setIsOpen }: DialogProps) {
+export function WalletDialog({ open, onClose }: DialogProps) {
   return (
-    <Dialog open={isOpen} onClose={setIsOpen}>
+    <Dialog open={open} onClose={onClose}>
       <DialogTitle>Sui Wallet</DialogTitle>
       <DialogBody>
         <Wallet />
       </DialogBody>
       <DialogActions>
-        <Button onClick={() => setIsOpen(false)}>OK</Button>
+        <Button onClick={() => onClose(false)}>OK</Button>
       </DialogActions>
     </Dialog>
   );

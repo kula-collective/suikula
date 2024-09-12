@@ -34,10 +34,9 @@ import {
   ChevronDownIcon,
   ChevronUpIcon,
   Cog8ToothIcon,
-  LightBulbIcon,
   PlusIcon,
-  ShieldCheckIcon,
   UserCircleIcon,
+  WalletIcon,
 } from "@heroicons/react/16/solid";
 import {
   Cog6ToothIcon,
@@ -45,8 +44,7 @@ import {
   QuestionMarkCircleIcon,
   SparklesIcon,
 } from "@heroicons/react/20/solid";
-import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 
 function AccountDropdownMenu({
   anchor,
@@ -60,7 +58,7 @@ function AccountDropdownMenu({
         <DropdownLabel>My account</DropdownLabel>
       </DropdownItem>
       <DropdownDivider />
-      <DropdownItem href="#">
+      {/* <DropdownItem href="#">
         <ShieldCheckIcon />
         <DropdownLabel>Privacy policy</DropdownLabel>
       </DropdownItem>
@@ -68,7 +66,12 @@ function AccountDropdownMenu({
         <LightBulbIcon />
         <DropdownLabel>Share feedback</DropdownLabel>
       </DropdownItem>
-      <DropdownDivider />
+      <DropdownDivider /> */}
+      <DropdownItem href="/wallet">
+        <WalletIcon />
+        <DropdownLabel>Wallet</DropdownLabel>
+      </DropdownItem>
+
       <DropdownItem href="#">
         <ArrowRightStartOnRectangleIcon />
         <DropdownLabel>Sign out</DropdownLabel>
@@ -87,8 +90,7 @@ export function ApplicationLayout({
   children: React.ReactNode;
 }) {
   const { authUser } = useAppstateStore((state) => state);
-  const [isWalletDialogOpen, setWalletDialogOpen] = useState(false);
-  const [isCreateKulaDialogOpen, setCreateKulaDialogOpen] = useState(false);
+  const router = useRouter();
 
   let pathname = usePathname();
 

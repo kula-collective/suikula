@@ -19,7 +19,7 @@ export default function Page() {
   }, []);
 
   if (!idToken) {
-    return <>Missing token</>;
+    return <>...</>;
   }
 
   return verifyGoogle(idToken).then((user) => {

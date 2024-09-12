@@ -28,11 +28,13 @@ export default async function RootLayout({
   kulas,
   offers,
   children,
+  modals,
 }: Readonly<{
   auth: React.ReactNode;
   kulas: React.ReactNode;
   offers: React.ReactNode;
   children: React.ReactNode;
+  modals: React.ReactNode;
 }>) {
   return (
     <html
@@ -50,6 +52,7 @@ export default async function RootLayout({
             <ApplicationLayout kulas={kulas} offers={offers}>
               {auth}
               {children}
+              {modals}
             </ApplicationLayout>
           </AuthProvider>
         </AppstateStoreProvider>

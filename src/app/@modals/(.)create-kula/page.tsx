@@ -9,7 +9,7 @@ export default function Page() {
   const router = useRouter();
 
   return (
-    <Dialog open={true} onClose={() => router.back()}>
+    <Dialog open={true} onClose={router.back}>
       <CreateKula />
     </Dialog>
   );
