@@ -8,23 +8,23 @@ import { Transaction } from "@mysten/sui/transactions";
 export function getOffers() {}
 
 export async function createKula(name: string, setIsLoading: any) {
-  const tx = new Transaction();
-  tx.moveCall({
-    target: `${process.env.NEXT_PUBLIC_TESTNET_KULA_PACKAGE_ID}::community::create_kula_community`,
-    arguments: [tx.pure.string(name)],
-  });
-  setIsLoading(true);
-  console.log("createKula, signing transaction block...");
-  const res = await handleSignAndExecuteTransaction(
-    tx,
-    "KulaCreation",
-    setIsLoading
-  );
-  const objId = res?.created?.[0].reference.objectId;
-  if (objId) {
-    console.log("Created Kula", objId);
-  }
-  return objId;
+  // const tx = new Transaction();
+  // tx.moveCall({
+  //   target: `${process.env.NEXT_PUBLIC_TESTNET_KULA_PACKAGE_ID}::community::create_kula_community`,
+  //   arguments: [tx.pure.string(name)],
+  // });
+  // setIsLoading(true);
+  // console.log("createKula, signing transaction block...");
+  // const res = await handleSignAndExecuteTransaction(
+  //   tx,
+  //   "KulaCreation",
+  //   setIsLoading
+  // );
+  // const objId = res?.created?.[0].reference.objectId;
+  // if (objId) {
+  //   console.log("Created Kula", objId);
+  // }
+  // return objId;
 }
 
 export async function getKulas() {
