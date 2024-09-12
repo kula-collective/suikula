@@ -51,8 +51,8 @@ export default async function RootLayout({
             {/* Must pass Server Components to Client Components as Props */}
             <ApplicationLayout kulas={kulas} offers={offers}>
               {auth}
-              {children}
               {modals}
+              {children}
             </ApplicationLayout>
           </AuthProvider>
         </AppstateStoreProvider>

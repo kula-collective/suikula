@@ -24,7 +24,6 @@ import {
   SidebarItem,
   SidebarLabel,
   SidebarSection,
-  SidebarSpacer,
 } from "@/components/catalyst/sidebar";
 import { SidebarLayout } from "@/components/catalyst/sidebar-layout";
 // import { WalletDialog } from "@/components/wallet-dialog";
@@ -38,12 +37,7 @@ import {
   UserCircleIcon,
   WalletIcon,
 } from "@heroicons/react/16/solid";
-import {
-  Cog6ToothIcon,
-  HomeIcon,
-  QuestionMarkCircleIcon,
-  SparklesIcon,
-} from "@heroicons/react/20/solid";
+import { Cog6ToothIcon, HomeIcon } from "@heroicons/react/20/solid";
 import { usePathname, useRouter } from "next/navigation";
 
 function AccountDropdownMenu({
@@ -185,7 +179,7 @@ export function ApplicationLayout({
               ))}
             </SidebarSection> */}
 
-            <SidebarSpacer />
+            {/* <SidebarSpacer />
 
             <SidebarSection>
               <SidebarItem href="#">
@@ -196,7 +190,7 @@ export function ApplicationLayout({
                 <SparklesIcon />
                 <SidebarLabel>Changelog</SidebarLabel>
               </SidebarItem>
-            </SidebarSection>
+            </SidebarSection> */}
           </SidebarBody>
 
           <SidebarFooter className="max-lg:hidden">

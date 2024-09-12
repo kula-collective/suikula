@@ -1,4 +1,7 @@
-import { DialogProps } from "@headlessui/react";
+"use client";
+
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { Button } from "./catalyst/button";
 import {
   Dialog,
@@ -8,20 +11,23 @@ import {
 } from "./catalyst/dialog";
 import Wallet from "./wallet";
 
-// export interface DialogProps {
-//   isOpen: boolean;
-//   setIsOpen: (open: boolean) => void;
-// }
+export function WalletDialog() {
+  const router = useRouter();
+  const [isOpen, setIsOpen] = useState(false);
 
-export function WalletDialog({ open, onClose }: DialogProps) {
+  const onClose = () => {
+    setIsOpen(false);
+    router.back();
+  };
+
   return (
-    <Dialog open={open} onClose={onClose}>
+    <Dialog open={isOpen} onClose={onClose}>
       <DialogTitle>Sui Wallet</DialogTitle>
       <DialogBody>
         <Wallet />
       </DialogBody>
       <DialogActions>
-        <Button onClick={() => onClose(false)}>OK</Button>
+        <Button onClick={onClose}>OK</Button>
       </DialogActions>
     </Dialog>
   );
