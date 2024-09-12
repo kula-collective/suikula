@@ -1,6 +1,8 @@
 // import type { Metadata } from "next";
 import { AppstateStoreProvider } from "@/providers/appstate-store-provider";
 import { AuthProvider } from "@/providers/auth-provider";
+import { createNetworkConfig, SuiClientProvider } from "@mysten/dapp-kit";
+import { getFullnodeUrl } from "@mysten/sui/client";
 import { Inter, Lexend } from "next/font/google";
 import { ApplicationLayout } from "./application-layout";
 import "./globals.css";
@@ -36,6 +38,12 @@ export default async function RootLayout({
   children: React.ReactNode;
   modals: React.ReactNode;
 }>) {
+  // Config options for the networks you want to connect to
+  const { networkConfig } = createNetworkConfig({
+    testnet: { url: getFullnodeUrl("testnet") },
+    mainnet: { url: getFullnodeUrl("mainnet") },
+  });
+
   return (
     <html
       lang="en"
@@ -47,14 +55,16 @@ export default async function RootLayout({
       </head>
       <body>
         <AppstateStoreProvider>
-          <AuthProvider>
-            {/* Must pass Server Components to Client Components as Props */}
-            <ApplicationLayout kulas={kulas} offers={offers}>
-              {auth}
-              {modals}
-              {children}
-            </ApplicationLayout>
-          </AuthProvider>
+          <SuiClientProvider networks={networkConfig} defaultNetwork="testnet">
+            <AuthProvider>
+              {/* Must pass Server Components to Client Components as Props */}
+              <ApplicationLayout kulas={kulas} offers={offers}>
+                {auth}
+                {modals}
+                {children}
+              </ApplicationLayout>
+            </AuthProvider>
+          </SuiClientProvider>
         </AppstateStoreProvider>
       </body>
     </html>

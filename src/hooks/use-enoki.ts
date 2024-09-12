@@ -1,11 +1,13 @@
 "use client";
 
+import { useSuiClient } from "@mysten/dapp-kit";
 import { useEnokiFlow } from "@mysten/enoki/react";
-import { getFullnodeUrl, SuiClient } from "@mysten/sui/client";
 import { Transaction } from "@mysten/sui/transactions";
 
+// Must be a hook because we're using a hook
 export function useEnoki() {
   const enokiFlow = useEnokiFlow();
+  const client = useSuiClient();
 
   async function createKula(name: string, setIsLoading: any) {
     const tx = new Transaction();
@@ -15,7 +17,7 @@ export function useEnoki() {
     });
     setIsLoading(true);
     console.log("createKula, signing transaction block...");
-    const res = await useExecuteTransaction(tx, "KulaCreation", setIsLoading);
+    const res = await signTransaction(tx, "KulaCreation", setIsLoading);
     const objId = res?.created?.[0].reference.objectId;
     if (objId) {
       console.log("Created Kula", objId);
@@ -23,7 +25,7 @@ export function useEnoki() {
     return objId;
   }
 
-  async function useExecuteTransaction(
+  async function signTransaction(
     tx: Transaction,
     operation: String,
     setIsLoading: any
@@ -31,7 +33,7 @@ export function useEnoki() {
     return enokiFlow
       .getKeypair({ network: "testnet" })
       .then((keypair) => {
-        return createSuiClient()
+        return client
           .signAndExecuteTransaction({
             signer: keypair,
             transaction: tx,
@@ -67,15 +69,6 @@ export function useEnoki() {
         // toast.error(`signing goes wrong, ${operation} operation failed.`);
       });
   }
-
-  const createSuiClient = () => {
-    const rpcUrl = getFullnodeUrl("testnet");
-
-    // create a client connected to testnet
-    const client = new SuiClient({ url: rpcUrl });
-
-    return client;
-  };
 
   return {
     createKula,
