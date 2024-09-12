@@ -20,12 +20,12 @@ import { useEnokiFlow } from "@mysten/enoki/react";
 import { redirect } from "next/navigation";
 
 export function ToolbarDropdown() {
-  const { authUser, logout } = useAppstateStore((state) => state);
+  const { authUser, resetUser } = useAppstateStore((state) => state);
   const enokiFlow = useEnokiFlow();
 
   const handleSignOut = () => {
     enokiFlow.logout().then(() => {
-      logout();
+      resetUser();
       redirect(`/`);
     });
   };
