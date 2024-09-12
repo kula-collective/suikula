@@ -1,7 +1,6 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 import { Button } from "./catalyst/button";
 import {
   Dialog,
@@ -13,15 +12,13 @@ import Wallet from "./wallet";
 
 export function WalletDialog() {
   const router = useRouter();
-  const [isOpen, setIsOpen] = useState(false);
 
   const onClose = () => {
-    setIsOpen(false);
     router.back();
   };
 
   return (
-    <Dialog open={isOpen} onClose={onClose}>
+    <Dialog open={true} onClose={onClose}>
       <DialogTitle>Sui Wallet</DialogTitle>
       <DialogBody>
         <Wallet />
