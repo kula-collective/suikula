@@ -12,14 +12,12 @@ import {
 import { Field, Label } from "@/components/catalyst/fieldset";
 import { Input } from "@/components/catalyst/input";
 import { useRouter } from "next/navigation";
-import { FormEvent, useState } from "react";
+import { FormEvent } from "react";
 
 export default function CreateKulaDialog() {
   const router = useRouter();
-  const [isOpen, setIsOpen] = useState(false);
 
   const onClose = () => {
-    setIsOpen(false);
     router.back();
   };
 
@@ -34,7 +32,7 @@ export default function CreateKulaDialog() {
   };
 
   return (
-    <Dialog open={isOpen} onClose={onClose}>
+    <Dialog open={true} onClose={onClose}>
       <form onSubmit={handleSubmit}>
         <DialogTitle>Create Kula</DialogTitle>
         <DialogDescription>
