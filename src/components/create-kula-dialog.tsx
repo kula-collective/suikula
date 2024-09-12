@@ -1,4 +1,4 @@
-"use client";
+"use server";
 
 import { createKula } from "@/actions";
 import { Button } from "@/components/catalyst/button";
@@ -11,14 +11,12 @@ import {
 } from "@/components/catalyst/dialog";
 import { Field, Label } from "@/components/catalyst/fieldset";
 import { Input } from "@/components/catalyst/input";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 import { FormEvent } from "react";
 
 export default function CreateKulaDialog() {
-  const router = useRouter();
-
   const onClose = () => {
-    router.back();
+    redirect("/");
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -28,7 +26,13 @@ export default function CreateKulaDialog() {
     const formData = new FormData(form);
     const formJson = Object.fromEntries(formData.entries());
     const kulaName = formJson["name"].toString();
-    await createKula(kulaName, (isLoading: boolean) => {});
+
+    try {
+      await createKula(kulaName, (isLoading: boolean) => {});
+      onClose();
+    } catch (e) {
+      console.error("Failed to create kula", e);
+    }
   };
 
   return (
