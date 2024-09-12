@@ -27,7 +27,7 @@ const lexend = Lexend({
 //   description: "The gift economy platform on Sui",
 // };
 
-export default async function RootLayout({
+export default function RootLayout({
   auth,
   kulas,
   offers,
