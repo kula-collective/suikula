@@ -12,6 +12,7 @@ export default function Page() {
 
   useEffect(() => {
     // Must run on the client because the server doesn't get the hash
+    // And must be in useEffect because otherwise window isn't defined
     const hash = window.location.hash;
     const idToken = hash.split("&")[0].substring("#id_token=".length);
     setIdToken(idToken);
