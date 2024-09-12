@@ -2,8 +2,8 @@
 
 // import type { Metadata } from "next";
 import { AppstateStoreProvider } from "@/providers/appstate-store-provider";
-import { AuthProvider } from "@/providers/auth-provider";
 import { createNetworkConfig, SuiClientProvider } from "@mysten/dapp-kit";
+import { EnokiFlowProvider } from "@mysten/enoki/react";
 import { getFullnodeUrl } from "@mysten/sui/client";
 import { Inter, Lexend } from "next/font/google";
 import { ApplicationLayout } from "./application-layout";
@@ -57,16 +57,19 @@ export default async function RootLayout({
       </head>
       <body>
         <AppstateStoreProvider>
-          <SuiClientProvider networks={networkConfig} defaultNetwork="testnet">
-            <AuthProvider>
+          <EnokiFlowProvider apiKey={process.env.NEXT_PUBLIC_ENOKI_API_KEY!}>
+            <SuiClientProvider
+              networks={networkConfig}
+              defaultNetwork="testnet"
+            >
               {/* Must pass Server Components to Client Components as Props */}
               <ApplicationLayout kulas={kulas} offers={offers}>
                 {auth}
                 {modals}
                 {children}
               </ApplicationLayout>
-            </AuthProvider>
-          </SuiClientProvider>
+            </SuiClientProvider>
+          </EnokiFlowProvider>
         </AppstateStoreProvider>
       </body>
     </html>

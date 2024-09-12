@@ -9,7 +9,6 @@ export default function Wallet() {
 
   useEffect(() => {
     const state = enokiFlow.$zkLoginState;
-    console.log("enoki state", state);
     setAddress(state.value?.address);
   }, [enokiFlow.$zkLoginState]);
 
