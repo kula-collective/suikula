@@ -1,7 +1,6 @@
 "use server";
 
 import { User } from "@/types/user";
-import { getFaucetHost, requestSuiFromFaucetV0 } from "@mysten/sui/faucet";
 import { SuiGraphQLClient } from "@mysten/sui/graphql";
 import { graphql } from "@mysten/sui/graphql/schemas/2024.4";
 import { Kula } from "./types/kula";
@@ -73,17 +72,4 @@ export async function getKulas() {
         } as Kula)
     ) || [];
   return kulas;
-}
-
-export async function requestSui(formData: FormData) {
-  const address = formData.get("address") as string;
-
-  console.log("sending SUI to " + address);
-
-  const resp = await requestSuiFromFaucetV0({
-    host: getFaucetHost("testnet"),
-    recipient: address,
-  });
-  console.log("resp", resp);
-  return resp;
 }
