@@ -25,12 +25,10 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({
   auth,
-  offers,
   children,
   modals,
 }: Readonly<{
   auth: React.ReactNode;
-  offers: React.ReactNode;
   children: React.ReactNode;
   modals: React.ReactNode;
 }>) {
