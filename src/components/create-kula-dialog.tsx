@@ -36,7 +36,7 @@ export default function CreateKulaDialog() {
       <form onSubmit={handleSubmit}>
         <DialogTitle>Create Kula</DialogTitle>
         <DialogDescription>
-          This creates a new Kula using the coin in your account.
+          This creates a new kula using the SUI in your account.
         </DialogDescription>
         <DialogBody>
           <Field>

@@ -31,13 +31,15 @@ import {
   ArrowRightStartOnRectangleIcon,
   ChevronDownIcon,
   ChevronUpIcon,
+  CircleStackIcon,
   Cog8ToothIcon,
   PlusIcon,
   UserCircleIcon,
   WalletIcon,
 } from "@heroicons/react/16/solid";
 import { Cog6ToothIcon, HomeIcon } from "@heroicons/react/20/solid";
-import { usePathname, useRouter } from "next/navigation";
+import { useWallets } from "@mysten/dapp-kit";
+import { usePathname } from "next/navigation";
 
 function AccountDropdownMenu({
   anchor,
@@ -50,7 +52,6 @@ function AccountDropdownMenu({
         <UserCircleIcon />
         <DropdownLabel>My account</DropdownLabel>
       </DropdownItem>
-      <DropdownDivider />
       {/* <DropdownItem href="#">
         <ShieldCheckIcon />
         <DropdownLabel>Privacy policy</DropdownLabel>
@@ -60,11 +61,16 @@ function AccountDropdownMenu({
         <DropdownLabel>Share feedback</DropdownLabel>
       </DropdownItem>
       <DropdownDivider /> */}
+      <DropdownItem href="/gas">
+        <CircleStackIcon />
+        <DropdownLabel>Gas: 312</DropdownLabel>
+      </DropdownItem>
+
       <DropdownItem href="/wallet">
         <WalletIcon />
         <DropdownLabel>Wallet</DropdownLabel>
       </DropdownItem>
-
+      <DropdownDivider />
       <DropdownItem href="/logout">
         <ArrowRightStartOnRectangleIcon />
         <DropdownLabel>Sign out</DropdownLabel>
@@ -83,7 +89,8 @@ export function ApplicationLayout({
   children: React.ReactNode;
 }) {
   const { authUser } = useAppstateStore((state) => state);
-  const router = useRouter();
+  const wallets = useWallets();
+  console.log("wallets", wallets);
 
   let pathname = usePathname();
 

@@ -2,9 +2,14 @@
 
 // import type { Metadata } from "next";
 import { AppstateStoreProvider } from "@/providers/appstate-store-provider";
-import { createNetworkConfig, SuiClientProvider } from "@mysten/dapp-kit";
+import {
+  createNetworkConfig,
+  SuiClientProvider,
+  WalletProvider,
+} from "@mysten/dapp-kit";
 import { EnokiFlowProvider } from "@mysten/enoki/react";
 import { getFullnodeUrl } from "@mysten/sui/client";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Inter, Lexend } from "next/font/google";
 import { ApplicationLayout } from "./application-layout";
 import "./globals.css";
@@ -45,6 +50,7 @@ export default function RootLayout({
     testnet: { url: getFullnodeUrl("testnet") },
     mainnet: { url: getFullnodeUrl("mainnet") },
   });
+  const queryClient = new QueryClient();
 
   return (
     <html
@@ -58,17 +64,21 @@ export default function RootLayout({
       <body>
         <AppstateStoreProvider>
           <EnokiFlowProvider apiKey={process.env.NEXT_PUBLIC_ENOKI_API_KEY!}>
-            <SuiClientProvider
-              networks={networkConfig}
-              defaultNetwork="testnet"
-            >
-              {/* Must pass Server Components to Client Components as Props */}
-              <ApplicationLayout kulas={kulas} offers={offers}>
-                {auth}
-                {modals}
-                {children}
-              </ApplicationLayout>
-            </SuiClientProvider>
+            <QueryClientProvider client={queryClient}>
+              <SuiClientProvider
+                networks={networkConfig}
+                defaultNetwork="testnet"
+              >
+                <WalletProvider>
+                  {/* Must pass Server Components to Client Components as Props */}
+                  <ApplicationLayout kulas={kulas} offers={offers}>
+                    {auth}
+                    {modals}
+                    {children}
+                  </ApplicationLayout>
+                </WalletProvider>
+              </SuiClientProvider>
+            </QueryClientProvider>
           </EnokiFlowProvider>
         </AppstateStoreProvider>
       </body>

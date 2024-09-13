@@ -1,6 +1,7 @@
 "use server";
 
 import { User } from "@/types/user";
+import { getFaucetHost, requestSuiFromFaucetV0 } from "@mysten/sui/faucet";
 
 export async function verifyGoogle(token: string) {
   try {
@@ -27,4 +28,17 @@ export async function verifyGoogle(token: string) {
     console.error("Failed Google token verification", error);
     throw error;
   }
+}
+
+export async function requestSui(formData: FormData) {
+  const address = formData.get("address") as string;
+
+  console.log("sending SUI to " + address);
+
+  const resp = await requestSuiFromFaucetV0({
+    host: getFaucetHost("testnet"),
+    recipient: address,
+  });
+  console.log("resp", resp);
+  return resp;
 }
