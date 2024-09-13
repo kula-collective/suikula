@@ -26,7 +26,7 @@ export function useEnoki() {
 
   async function signTransaction(tx: Transaction, operation: String) {
     // Get the keypair for the current user.
-    const keypair = await enokiFlow.getKeypair();
+    const keypair = await enokiFlow.getKeypair({ network: "testnet" });
     const resp = await client.signAndExecuteTransaction({
       signer: keypair,
       transaction: tx,
