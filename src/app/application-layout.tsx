@@ -1,5 +1,4 @@
-"use client";
-
+import { AccountMenu } from "@/components/account-menu";
 import { Avatar } from "@/components/catalyst/avatar";
 import {
   Dropdown,
@@ -26,95 +25,28 @@ import {
   SidebarSection,
 } from "@/components/catalyst/sidebar";
 import { SidebarLayout } from "@/components/catalyst/sidebar-layout";
-import { useAppstateStore } from "@/providers/appstate-store-provider";
+import { Kula } from "@/types/kula";
 import {
-  ArrowRightStartOnRectangleIcon,
   ChevronDownIcon,
-  ChevronUpIcon,
-  CircleStackIcon,
   Cog8ToothIcon,
   PlusIcon,
-  UserCircleIcon,
-  WalletIcon,
 } from "@heroicons/react/16/solid";
 import { Cog6ToothIcon, HomeIcon } from "@heroicons/react/20/solid";
-import { useWallets } from "@mysten/dapp-kit";
-import { usePathname } from "next/navigation";
-
-function AccountDropdownMenu({
-  anchor,
-}: {
-  anchor: "top start" | "bottom end";
-}) {
-  return (
-    <DropdownMenu className="min-w-64" anchor={anchor}>
-      <DropdownItem href="#">
-        <UserCircleIcon />
-        <DropdownLabel>My account</DropdownLabel>
-      </DropdownItem>
-      {/* <DropdownItem href="#">
-        <ShieldCheckIcon />
-        <DropdownLabel>Privacy policy</DropdownLabel>
-      </DropdownItem>
-      <DropdownItem href="#">
-        <LightBulbIcon />
-        <DropdownLabel>Share feedback</DropdownLabel>
-      </DropdownItem>
-      <DropdownDivider /> */}
-      <DropdownItem href="/gas">
-        <CircleStackIcon />
-        <DropdownLabel>Gas: 312</DropdownLabel>
-      </DropdownItem>
-
-      <DropdownItem href="/wallet">
-        <WalletIcon />
-        <DropdownLabel>Wallet</DropdownLabel>
-      </DropdownItem>
-      <DropdownDivider />
-      <DropdownItem href="/logout">
-        <ArrowRightStartOnRectangleIcon />
-        <DropdownLabel>Sign out</DropdownLabel>
-      </DropdownItem>
-    </DropdownMenu>
-  );
-}
 
 export function ApplicationLayout({
-  children,
   kulas,
-  offers,
+  children,
 }: {
-  kulas: React.ReactNode;
-  offers: React.ReactNode;
+  kulas: Kula[];
   children: React.ReactNode;
 }) {
-  const { authUser } = useAppstateStore((state) => state);
-  const wallets = useWallets();
-  console.log("wallets", wallets);
-
-  let pathname = usePathname();
-
   return (
     <SidebarLayout
       navbar={
         <Navbar>
           <NavbarSpacer />
           <NavbarSection>
-            <Dropdown>
-              {authUser ? (
-                <>
-                  <DropdownButton as={NavbarItem}>
-                    <Avatar
-                      src={authUser?.pic ?? "https://placecats.com/g/100/100"}
-                      square
-                    />
-                  </DropdownButton>
-                  <AccountDropdownMenu anchor="bottom end" />
-                </>
-              ) : (
-                <Link href="/login">Sign in</Link>
-              )}
-            </Dropdown>
+            <AccountMenu />
           </NavbarSection>
         </Navbar>
       }
@@ -122,7 +54,7 @@ export function ApplicationLayout({
         <Sidebar>
           <SidebarHeader>
             <Dropdown>
-              <DropdownButton as={SidebarItem}>
+              <DropdownButton as={NavbarItem}>
                 <Avatar src="/catalyst.svg" />
                 <SidebarLabel>Kula Collective</SidebarLabel>
                 <ChevronDownIcon />
@@ -136,7 +68,13 @@ export function ApplicationLayout({
                   <DropdownLabel>Settings</DropdownLabel>
                 </DropdownItem>
                 <DropdownDivider />
-                {kulas}
+                {kulas.map((kula) => (
+                  <DropdownItem key={kula.id}>
+                    <Link href={`/kulas/${kula.id}`}>
+                      <DropdownLabel>{kula.name}</DropdownLabel>
+                    </Link>
+                  </DropdownItem>
+                ))}
                 {/* <DropdownItem href="#">
                   <Avatar
                     slot="icon"
@@ -156,7 +94,7 @@ export function ApplicationLayout({
 
           <SidebarBody>
             <SidebarSection>
-              <SidebarItem href="/" current={pathname === "/"}>
+              <SidebarItem href="/" path="/">
                 <HomeIcon />
                 <SidebarLabel>Home</SidebarLabel>
               </SidebarItem>
@@ -167,10 +105,7 @@ export function ApplicationLayout({
                 <Square2StackIcon />
                 <SidebarLabel>Offers</SidebarLabel>
               </SidebarItem> */}
-              <SidebarItem
-                href="/settings"
-                current={pathname.startsWith("/settings")}
-              >
+              <SidebarItem href="/settings" path="/settings">
                 <Cog6ToothIcon />
                 <SidebarLabel>Settings</SidebarLabel>
               </SidebarItem>
@@ -200,33 +135,7 @@ export function ApplicationLayout({
           </SidebarBody>
 
           <SidebarFooter className="max-lg:hidden">
-            <Dropdown>
-              {authUser ? (
-                <DropdownButton as={SidebarItem}>
-                  <span className="flex min-w-0 items-center gap-3">
-                    <Avatar
-                      src={authUser?.pic}
-                      className="size-10"
-                      square
-                      alt=""
-                    />
-                    <span className="min-w-0">
-                      <span className="block truncate text-sm/5 font-medium text-zinc-950 dark:text-white">
-                        {authUser?.firstName}
-                      </span>
-                      <span className="block truncate text-xs/5 font-normal text-zinc-500 dark:text-zinc-400">
-                        {authUser?.email}
-                      </span>
-                    </span>
-                  </span>
-                  <ChevronUpIcon />
-                </DropdownButton>
-              ) : (
-                <Link href="/login">Login</Link>
-              )}
-
-              <AccountDropdownMenu anchor="top start" />
-            </Dropdown>
+            <AccountMenu sidebar={true} />
           </SidebarFooter>
         </Sidebar>
       }

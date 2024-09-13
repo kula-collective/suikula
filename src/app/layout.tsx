@@ -1,15 +1,7 @@
-"use client";
-
-// import type { Metadata } from "next";
+import { getKulas } from "@/actions";
 import { AppstateStoreProvider } from "@/providers/appstate-store-provider";
-import {
-  createNetworkConfig,
-  SuiClientProvider,
-  WalletProvider,
-} from "@mysten/dapp-kit";
-import { EnokiFlowProvider } from "@mysten/enoki/react";
-import { getFullnodeUrl } from "@mysten/sui/client";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { SuiProvider } from "@/providers/sui-provider";
+import type { Metadata } from "next";
 import { Inter, Lexend } from "next/font/google";
 import { ApplicationLayout } from "./application-layout";
 import "./globals.css";
@@ -26,32 +18,23 @@ const lexend = Lexend({
   variable: "--font-lexend",
 });
 
-// FIXME Put this in a layout but not in the same place as EnokiFlowProvider
-// export const metadata: Metadata = {
-//   title: "Let's Kula on Sui",
-//   description: "The gift economy platform on Sui",
-// };
+export const metadata: Metadata = {
+  title: "Kula Collective on Sui",
+  description: "The gift economy platform on Sui",
+};
 
-export default function RootLayout({
+export default async function RootLayout({
   auth,
-  kulas,
   offers,
   children,
   modals,
 }: Readonly<{
   auth: React.ReactNode;
-  kulas: React.ReactNode;
   offers: React.ReactNode;
   children: React.ReactNode;
   modals: React.ReactNode;
 }>) {
-  // Config options for the networks you want to connect to
-  const { networkConfig } = createNetworkConfig({
-    testnet: { url: getFullnodeUrl("testnet") },
-    mainnet: { url: getFullnodeUrl("mainnet") },
-  });
-  const queryClient = new QueryClient();
-
+  const kulas = await getKulas();
   return (
     <html
       lang="en"
@@ -63,23 +46,15 @@ export default function RootLayout({
       </head>
       <body>
         <AppstateStoreProvider>
-          <EnokiFlowProvider apiKey={process.env.NEXT_PUBLIC_ENOKI_API_KEY!}>
-            <QueryClientProvider client={queryClient}>
-              <SuiClientProvider
-                networks={networkConfig}
-                defaultNetwork="testnet"
-              >
-                <WalletProvider>
-                  {/* Must pass Server Components to Client Components as Props */}
-                  <ApplicationLayout kulas={kulas} offers={offers}>
-                    {auth}
-                    {modals}
-                    {children}
-                  </ApplicationLayout>
-                </WalletProvider>
-              </SuiClientProvider>
-            </QueryClientProvider>
-          </EnokiFlowProvider>
+          {/* All the providers are in SuiProvider so that root layout can be rendered on server */}
+          <SuiProvider>
+            {/* Must pass Server Components to Client Components as Props */}
+            <ApplicationLayout kulas={kulas}>
+              {auth}
+              {modals}
+              {children}
+            </ApplicationLayout>
+          </SuiProvider>
         </AppstateStoreProvider>
       </body>
     </html>
