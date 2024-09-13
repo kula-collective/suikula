@@ -62,7 +62,7 @@ export async function getKulas() {
   const result = await gqlClient.query({
     query: kulasQuery,
   });
-  console.log("gql result", JSON.stringify(result));
+  console.log("query Kula result", JSON.stringify(result));
 
   const kulas =
     result.data?.objects.nodes.map(
