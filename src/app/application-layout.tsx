@@ -1,3 +1,4 @@
+import { getKulas } from "@/actions";
 import { AccountMenu } from "@/components/account-menu";
 import { Avatar } from "@/components/catalyst/avatar";
 import {
@@ -26,17 +27,16 @@ import {
 } from "@/components/catalyst/sidebar";
 import { SidebarLayout } from "@/components/catalyst/sidebar-layout";
 import { CreateKulaItem } from "@/components/create-kula-item";
-import { Kula } from "@/types/kula";
 import { ChevronDownIcon, Cog8ToothIcon } from "@heroicons/react/16/solid";
 import { Cog6ToothIcon, HomeIcon } from "@heroicons/react/20/solid";
 
-export function ApplicationLayout({
-  kulas,
+export async function ApplicationLayout({
   children,
 }: {
-  kulas: Kula[];
   children: React.ReactNode;
 }) {
+  const kulas = await getKulas();
+
   return (
     <SidebarLayout
       navbar={

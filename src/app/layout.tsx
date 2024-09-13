@@ -1,4 +1,3 @@
-import { getKulas } from "@/actions";
 import { AppstateStoreProvider } from "@/providers/appstate-store-provider";
 import { SuiProvider } from "@/providers/sui-provider";
 import type { Metadata } from "next";
@@ -32,7 +31,6 @@ export default async function RootLayout({
   children: React.ReactNode;
   modals: React.ReactNode;
 }>) {
-  const kulas = await getKulas();
   return (
     <html
       lang="en"
@@ -47,7 +45,7 @@ export default async function RootLayout({
           {/* All the providers are in SuiProvider so that root layout can be rendered on server */}
           <SuiProvider>
             {/* Must pass Server Components to Client Components as Props */}
-            <ApplicationLayout kulas={kulas}>
+            <ApplicationLayout>
               {auth}
               {modals}
               {children}

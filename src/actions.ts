@@ -40,6 +40,10 @@ export async function getKulas() {
   );
   const gqlClient = new SuiGraphQLClient({
     url: "https://sui-testnet.mystenlabs.com/graphql",
+
+    // For `revalidateTag("kulas")` when a kula is created
+    fetch: (input, init?) =>
+      fetch(input, { next: { tags: ["kulas"] }, ...init }),
   });
 
   const kulasQuery = graphql(`
