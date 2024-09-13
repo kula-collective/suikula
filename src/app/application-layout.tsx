@@ -25,12 +25,9 @@ import {
   SidebarSection,
 } from "@/components/catalyst/sidebar";
 import { SidebarLayout } from "@/components/catalyst/sidebar-layout";
+import { CreateKulaItem } from "@/components/create-kula-item";
 import { Kula } from "@/types/kula";
-import {
-  ChevronDownIcon,
-  Cog8ToothIcon,
-  PlusIcon,
-} from "@heroicons/react/16/solid";
+import { ChevronDownIcon, Cog8ToothIcon } from "@heroicons/react/16/solid";
 import { Cog6ToothIcon, HomeIcon } from "@heroicons/react/20/solid";
 
 export function ApplicationLayout({
@@ -83,11 +80,7 @@ export function ApplicationLayout({
                   />
                   <DropdownLabel>South Austin</DropdownLabel>
                 </DropdownItem> */}
-                <DropdownDivider />
-                <DropdownItem href="/create-kula">
-                  <PlusIcon />
-                  <DropdownLabel>New Kula&hellip;</DropdownLabel>
-                </DropdownItem>
+                <CreateKulaItem />
               </DropdownMenu>
             </Dropdown>
           </SidebarHeader>
