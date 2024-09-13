@@ -8,22 +8,15 @@ export async function Kulas() {
   const kulaList = await getKulas();
 
   return (
-    <div className="container">
-      {kulaList.length > 0 ? (
-        <ul>
-          {/* TODO: Don't force to be in a DropdownList */}
-          {kulaList.map((kula) => (
-            <DropdownItem key={kula.id}>
-              <Link href={`/kulas/${kula.id}`}>
-                <DropdownLabel>{kula.name}</DropdownLabel>
-              </Link>
-            </DropdownItem>
-          ))}
-        </ul>
-      ) : (
-        <div>No kulas found</div>
-      )}
-    </div>
+    <>
+      {kulaList.map((kula) => (
+        <DropdownItem key={kula.id}>
+          <Link href={`/kulas/${kula.id}`}>
+            <DropdownLabel>{kula.name}</DropdownLabel>
+          </Link>
+        </DropdownItem>
+      ))}
+    </>
   );
 }
 
