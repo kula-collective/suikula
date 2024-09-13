@@ -32,7 +32,6 @@ export async function verifyGoogle(token: string) {
   }
 }
 
-// Server Action
 export async function getKulas() {
   console.log(
     "getKulas in package",
@@ -76,4 +75,42 @@ export async function getKulas() {
         } as Kula)
     ) || [];
   return kulas;
+}
+
+export async function getKula(id: string) {
+  const gqlClient = new SuiGraphQLClient({
+    url: "https://sui-testnet.mystenlabs.com/graphql",
+  });
+
+  const kulaQuery = graphql(`
+        query { 
+          objects(first: 30, filter: { 
+            type: "${process.env.NEXT_PUBLIC_TESTNET_KULA_PACKAGE_ID}::community::Kula"
+            objectIds: "${id}"
+          }) {
+            nodes {
+              asMoveObject {
+                contents {
+                  json
+                }
+              }
+            }
+          }
+        }
+      `);
+
+  const result = await gqlClient.query({
+    query: kulaQuery,
+  });
+  console.log("query Kula result", JSON.stringify(result));
+
+  const kulas =
+    result.data?.objects.nodes.map(
+      (node) =>
+        ({
+          id: (node.asMoveObject?.contents?.json as any)["id"] as string,
+          name: (node.asMoveObject?.contents?.json as any)["name"] as string,
+        } as Kula)
+    ) || [];
+  return kulas.length > 0 ? kulas[0] : null;
 }
