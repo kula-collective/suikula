@@ -1,5 +1,5 @@
-import CreateKula from "@/components/create-kula";
+import CreateKulaDialog from "@/components/create-kula-dialog";
 
 export default function Page() {
-  return <CreateKula />;
+  return <CreateKulaDialog />;
 }
