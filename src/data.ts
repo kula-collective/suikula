@@ -11,13 +11,24 @@ export async function getOffers() {
     {
       id: "1000",
       name: "Human Design",
-      blurb: "Discover your personal secret to flow",
+      blurb: "Discover your personal secret to flow.",
       description: "I would love to give you a quick Human Design reading.",
       location: "Austin or Virtual",
       url: "/offers/1000",
-      status: "On Sale",
+      status: "Gift",
       imgUrl: "/humandesign.jpeg",
       thumbUrl: "/humandesign.jpeg",
+    },
+    {
+      id: "1001",
+      name: "Tools",
+      blurb: "I have a nice collection of tools you can borrow.",
+      description: "",
+      location: "Westgate (South Austin)",
+      url: "/offers/1001",
+      status: "Loan",
+      imgUrl: "/tools.jpg",
+      thumbUrl: "/tools.jpg",
     },
   ];
 }

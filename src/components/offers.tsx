@@ -43,9 +43,7 @@ export default async function Offers() {
                     <MapPinIcon height={20} />
                     {offer.location}
                   </div>
-                  <div className="text-xs/6 text-zinc-600">
-                    {offer.description}
-                  </div>
+                  <div className="text-xs/6 text-zinc-600">{offer.blurb}</div>
                 </div>
               </div>
               <div className="flex items-center gap-4">
