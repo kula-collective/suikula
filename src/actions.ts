@@ -1,82 +1,30 @@
-"use client";
+"use server";
 
-import { useEnokiFlow } from "@mysten/enoki/react";
-import { getFullnodeUrl, SuiClient } from "@mysten/sui/client";
-import { Transaction } from "@mysten/sui/transactions";
+import { User } from "@/types/user";
 
-export async function getOffers() {}
+export async function verifyGoogle(token: string) {
+  try {
+    const { OAuth2Client } = require("google-auth-library");
+    const client = new OAuth2Client();
 
-export async function useCreateKula(name: string, setIsLoading: any) {
-  const tx = new Transaction();
-  tx.moveCall({
-    target: `${process.env.NEXT_PUBLIC_TESTNET_KULA_PACKAGE_ID}::community::create_kula_community`,
-    arguments: [tx.pure.string(name)],
-  });
-  setIsLoading(true);
-  console.log("createKula, signing transaction block...");
-  const res = await useHandleSignAndExecuteTransaction(
-    tx,
-    "KulaCreation",
-    setIsLoading
-  );
-  const objId = res?.created?.[0].reference.objectId;
-  if (objId) {
-    console.log("Created Kula", objId);
-  }
-  return objId;
-}
-
-const createSuiClient = () => {
-  const rpcUrl = getFullnodeUrl("testnet");
-
-  // create a client connected to testnet
-  const client = new SuiClient({ url: rpcUrl });
-
-  return client;
-};
-
-const useHandleSignAndExecuteTransaction = async (
-  tx: Transaction,
-  operation: String,
-  setIsLoading: any
-) => {
-  const enokiFlow = useEnokiFlow();
-  return enokiFlow
-    .getKeypair({ network: "testnet" })
-    .then((keypair) => {
-      return createSuiClient()
-        .signAndExecuteTransaction({
-          signer: keypair,
-          transaction: tx,
-          requestType: "WaitForLocalExecution",
-          options: {
-            showEffects: true,
-            showEvents: true,
-          },
-        })
-        .then((resp) => {
-          setIsLoading(false);
-          console.log(resp);
-          if (resp.effects?.status.status === "success") {
-            console.log(`${operation} operation successful`);
-            // toast.success(`${operation} operation successful`);
-            return resp.effects;
-          } else {
-            console.log(`${operation} operation failed`);
-            // toast.error(`${operation} operation failed.`);
-            return;
-          }
-        })
-        .catch((err) => {
-          setIsLoading(false);
-          console.log(`${operation} operation failed`);
-          console.log(`${operation} error : `, err);
-          // toast.error(`Something went wrong, ${operation} operation failed.`);
-        });
-    })
-    .catch((err: any) => {
-      setIsLoading(false);
-      console.log(`signing goes wrong ${operation} error : `, err);
-      // toast.error(`signing goes wrong, ${operation} operation failed.`);
+    const ticket = await client.verifyIdToken({
+      idToken: token,
+      audience: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!, // Specify the CLIENT_ID of the app that accesses the backend
+      // Or, if multiple clients access the backend:
+      //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
     });
-};
+    console.log("ticket", ticket);
+    const payload = ticket.getPayload();
+
+    return {
+      id: payload["sub"],
+      firstName: payload["given_name"],
+      lastName: payload["family_name"],
+      email: payload["email"],
+      pic: payload["picture"],
+    } as User;
+  } catch (error) {
+    console.error("Failed Google token verification", error);
+    throw error;
+  }
+}

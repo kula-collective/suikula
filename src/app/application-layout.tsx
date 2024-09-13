@@ -65,7 +65,7 @@ function AccountDropdownMenu({
         <DropdownLabel>Wallet</DropdownLabel>
       </DropdownItem>
 
-      <DropdownItem href="#">
+      <DropdownItem href="/logout">
         <ArrowRightStartOnRectangleIcon />
         <DropdownLabel>Sign out</DropdownLabel>
       </DropdownItem>
@@ -105,7 +105,7 @@ export function ApplicationLayout({
                   <AccountDropdownMenu anchor="bottom end" />
                 </>
               ) : (
-                <Link href="/login">Login</Link>
+                <Link href="/login">Sign in</Link>
               )}
             </Dropdown>
           </NavbarSection>
