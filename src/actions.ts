@@ -48,7 +48,7 @@ export async function getKulas() {
 
   const kulasQuery = graphql(`
         query { 
-          objects(first: 10, filter: { 
+          objects(first: 30, filter: { 
             type: "${process.env.NEXT_PUBLIC_TESTNET_KULA_PACKAGE_ID}::community::Kula"
           }) {
             nodes {
