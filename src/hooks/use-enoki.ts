@@ -3,7 +3,6 @@
 import { useSuiClient } from "@mysten/dapp-kit";
 import { useEnokiFlow } from "@mysten/enoki/react";
 import { Transaction } from "@mysten/sui/transactions";
-import { revalidateTag } from "next/cache";
 
 // Must be a hook because we're using a hook
 export function useEnoki() {
@@ -21,7 +20,6 @@ export function useEnoki() {
     const objId = res?.created?.[0].reference.objectId;
     if (objId) {
       console.log("Created Kula", objId);
-      revalidateTag("kulas");
     }
     return objId;
   }

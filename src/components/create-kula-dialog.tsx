@@ -11,6 +11,7 @@ import {
 import { Field, Label } from "@/components/catalyst/fieldset";
 import { Input } from "@/components/catalyst/input";
 import { useEnoki } from "@/hooks/use-enoki";
+import { revalidateTag } from "next/cache";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 
@@ -32,7 +33,15 @@ export default function CreateKulaDialog() {
       const kulaName = formJson["name"].toString();
 
       const kulaId = await enoki.createKula(kulaName);
-      router.push(`/kulas/${kulaId}`);
+
+      if (kulaId) {
+        try {
+          revalidateTag("kulas");
+        } catch (e) {
+          // ignore
+        }
+        router.push(`/kulas/${kulaId}`);
+      }
     } finally {
       setPending(false);
     }
