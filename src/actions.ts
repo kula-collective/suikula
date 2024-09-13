@@ -35,6 +35,10 @@ export async function verifyGoogle(token: string) {
 
 // Server Action
 export async function getKulas() {
+  console.log(
+    "getKulas in package",
+    process.env.NEXT_PUBLIC_TESTNET_KULA_PACKAGE_ID
+  );
   const gqlClient = new SuiGraphQLClient({
     url: "https://sui-testnet.mystenlabs.com/graphql",
   });
@@ -58,7 +62,7 @@ export async function getKulas() {
   const result = await gqlClient.query({
     query: kulasQuery,
   });
-  console.log("gql result", result);
+  console.log("gql result", JSON.stringify(result));
 
   const kulas =
     result.data?.objects.nodes.map(
